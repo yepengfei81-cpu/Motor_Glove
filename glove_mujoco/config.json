@@ -1,0 +1,16 @@
+{
+  "url": "https://cad.onshape.com/documents/774967842564538ef4982330/w/4023b19c6157ef52fd29a270/e/34dbb441df08190a06d99a9c",
+  "output_format": "mujoco",
+  "robot_name": "glove",
+  "freejoint": false,
+  "joint_properties": {
+    "*": {
+      "actuated": false
+    },
+    "*_motor": {
+      "actuated": true
+    }
+  },
+  "root_pose_mode": "palm_down",
+  "root_clearance": 0.015
+}

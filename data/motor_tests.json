@@ -1,0 +1,279 @@
+[
+ {
+  "id": 17,
+  "model": "XL330-M288",
+  "temp0": 24,
+  "volt": 6.0,
+  "move_cw": 1679,
+  "imeas_cw": 59.0,
+  "move_ccw": -1677,
+  "imeas_ccw": -58.0,
+  "legs": [
+   {
+    "t": 0.293806791305542,
+    "err": -8,
+    "hold": 7,
+    "peak": 291
+   },
+   {
+    "t": null,
+    "err": 9,
+    "hold": 8,
+    "peak": 306
+   }
+  ],
+  "temp1": 24,
+  "hw": 0,
+  "verdict": "模式 5 第 2 段 2 s 内没到位（差 +9 ticks）",
+  "label": "batch1",
+  "baud": 57600,
+  "time": "2026-10-15 04:37"
+ },
+ {
+  "id": 21,
+  "model": "XL330-M288",
+  "temp0": 22,
+  "volt": 6.0,
+  "move_cw": 1682,
+  "imeas_cw": 58.0,
+  "move_ccw": -1732,
+  "imeas_ccw": -59.0,
+  "legs": [
+   {
+    "t": 0.32508301734924316,
+    "err": -6,
+    "hold": 6,
+    "peak": 283
+   },
+   {
+    "t": 0.38866353034973145,
+    "err": 7,
+    "hold": 1,
+    "peak": 306
+   }
+  ],
+  "temp1": 22,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1",
+  "baud": 57600,
+  "time": "2026-10-15 04:37",
+  "new_id": 24
+ },
+ {
+  "id": 22,
+  "model": "XL330-M288",
+  "temp0": 21,
+  "volt": 6.0,
+  "move_cw": 1631,
+  "imeas_cw": 58,
+  "move_ccw": -1805,
+  "imeas_ccw": -58.0,
+  "legs": [
+   {
+    "t": 0.41911768913269043,
+    "err": -4,
+    "hold": 5,
+    "peak": 280
+   },
+   {
+    "t": null,
+    "err": 9,
+    "hold": 8,
+    "peak": 274
+   }
+  ],
+  "temp1": 22,
+  "hw": 0,
+  "verdict": "模式 5 第 2 段 2 s 内没到位（差 +9 ticks）",
+  "label": "batch1",
+  "baud": 57600,
+  "time": "2026-10-15 04:37"
+ },
+ {
+  "id": 23,
+  "model": "XL330-M288",
+  "temp0": 24,
+  "volt": 6.0,
+  "move_cw": 1888,
+  "imeas_cw": 58.0,
+  "move_ccw": -1824,
+  "imeas_ccw": -58.0,
+  "legs": [
+   {
+    "t": 0.23108148574829102,
+    "err": -4,
+    "hold": 5,
+    "peak": 297
+   },
+   {
+    "t": 0.23122501373291016,
+    "err": 4,
+    "hold": 5,
+    "peak": 272
+   }
+  ],
+  "temp1": 24,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1",
+  "baud": 57600,
+  "time": "2026-10-15 04:37",
+  "new_id": 25
+ },
+ {
+  "id": 17,
+  "model": "XL330-M288",
+  "temp0": 24,
+  "volt": 6.0,
+  "move_cw": 1528,
+  "imeas_cw": 59,
+  "move_ccw": -1530,
+  "imeas_ccw": -58,
+  "legs": [
+   {
+    "t": 0.19911408424377441,
+    "err": -7,
+    "hold": 4,
+    "peak": 280
+   },
+   {
+    "t": 0.19936704635620117,
+    "err": 8,
+    "hold": 6,
+    "peak": 283
+   }
+  ],
+  "temp1": 24,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1b",
+  "baud": 57600,
+  "time": "2026-10-15 04:41",
+  "new_id": 21
+ },
+ {
+  "id": 22,
+  "model": "XL330-M288",
+  "temp0": 22,
+  "volt": 6.0,
+  "move_cw": 1794,
+  "imeas_cw": 58.5,
+  "move_ccw": -1798,
+  "imeas_ccw": -58.0,
+  "legs": [
+   {
+    "t": 0.1987764835357666,
+    "err": -5,
+    "hold": 5,
+    "peak": 283
+   },
+   {
+    "t": 0.1996159553527832,
+    "err": 8,
+    "hold": 7,
+    "peak": 276
+   }
+  ],
+  "temp1": 22,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1b",
+  "baud": 57600,
+  "time": "2026-10-15 04:41",
+  "new_id": 22
+ },
+ {
+  "id": 24,
+  "model": "XL330-M288",
+  "temp0": 23,
+  "volt": 5.9,
+  "move_cw": 1722,
+  "imeas_cw": 58.0,
+  "move_ccw": -1750,
+  "imeas_ccw": -58.5,
+  "legs": [
+   {
+    "t": 0.1995546817779541,
+    "err": -6,
+    "hold": 5,
+    "peak": 290
+   },
+   {
+    "t": 0.19979405403137207,
+    "err": 6,
+    "hold": 6,
+    "peak": 308
+   }
+  ],
+  "temp1": 23,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1b",
+  "baud": 57600,
+  "time": "2026-10-15 04:41",
+  "new_id": 24
+ },
+ {
+  "id": 25,
+  "model": "XL330-M288",
+  "temp0": 24,
+  "volt": 6.0,
+  "move_cw": 1715,
+  "imeas_cw": 58,
+  "move_ccw": -1828,
+  "imeas_ccw": -58.0,
+  "legs": [
+   {
+    "t": 0.19970226287841797,
+    "err": -6,
+    "hold": 5,
+    "peak": 274
+   },
+   {
+    "t": 0.19962215423583984,
+    "err": 5,
+    "hold": 5,
+    "peak": 288
+   }
+  ],
+  "temp1": 24,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch1b",
+  "baud": 57600,
+  "time": "2026-10-15 04:41",
+  "new_id": 25
+ },
+ {
+  "id": 26,
+  "model": "XL330-M288",
+  "temp0": 23,
+  "volt": 6.6,
+  "move_cw": 1585,
+  "imeas_cw": 58,
+  "move_ccw": -1549,
+  "imeas_ccw": -58,
+  "legs": [
+   {
+    "t": 0.20500779151916504,
+    "err": -7,
+    "hold": 6,
+    "peak": 305
+   },
+   {
+    "t": 0.20596909523010254,
+    "err": 9,
+    "hold": 10,
+    "peak": 302
+   }
+  ],
+  "temp1": 24,
+  "hw": 0,
+  "verdict": "通过",
+  "label": "batch2",
+  "baud": 57600,
+  "time": "2026-10-15 07:35",
+  "new_id": 26
+ }
+]

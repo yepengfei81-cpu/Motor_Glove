@@ -1,0 +1,1 @@
+{ "name": "glove-deck", "private": true, "dependencies": { "pptxgenjs": "^4.0.1" } }

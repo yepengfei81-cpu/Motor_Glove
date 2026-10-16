@@ -1,0 +1,3 @@
+# U2D2（FTDI FT232H）插上时自动把 USB latency timer 设成 1 ms（默认 16 ms，会让每次读写多等十几毫秒）
+# 安装：sudo cp tools/99-dxl-latency.rules /etc/udev/rules.d/ && sudo udevadm control --reload-rules && sudo udevadm trigger
+ACTION=="add", SUBSYSTEM=="usb-serial", DRIVER=="ftdi_sio", ATTR{latency_timer}="1"

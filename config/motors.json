@@ -1,0 +1,15 @@
+{
+ "1": "thumb_cmc_abd_motor",
+ "2": "thumb_cmc_flex_motor",
+ "3": "thumb_mcp_flex_motor",
+ "4": "thumb_ip_motor",
+ "5": "index_mcp_flex_motor",
+ "6": "index_mcp_abd_motor",
+ "7": "index_pip_motor",
+ "8": "mid_mcp_motor",
+ "9": "mid_mcp_abd_motor",
+ "10": "mid_pip_motor",
+ "11": "ring_mcp_flex_motor",
+ "12": "ring_mcp_abd_motor",
+ "13": "ring_pip_motor"
+}

@@ -1,0 +1,27 @@
+# 密钥：Onshape API key 在 .env 里，绝不能进仓库
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 运行时产物
+MUJOCO_LOG.TXT
+*.log
+data/*.png
+
+# 第三方资料（手册、论文配图），版权和体积原因不进仓库
+docs/XL330-M288-T_eManual.pdf
+docs/DYNAMIXEL_Protocol_2.0.pdf
+docs/OpenRB-150_eManual.pdf
+docs/figs/papers/
+
+# PPT 生成工具的依赖
+tools/deck/node_modules/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
