@@ -46,7 +46,8 @@ if __name__ == "__main__":
         subprocess.run([sys.executable, os.path.join(tools, "tune_mjcf.py"), robot_dir], check=True)
     if os.path.exists(os.path.join(robot_dir, "robot.xml")):
         # URDF 目录的摆放姿态是从 MuJoCo 模型算的，MuJoCo 模型更新后顺便重算；测试方块也跟着重新摆
-        sibling = os.path.join(os.path.dirname(os.path.abspath(robot_dir)), "glove")
+        base_name = os.path.basename(os.path.abspath(robot_dir))
+        sibling = os.path.join(os.path.dirname(os.path.abspath(robot_dir)), base_name[:-len("_mujoco")] if base_name.endswith("_mujoco") else base_name)
         if os.path.exists(os.path.join(sibling, "robot.urdf")):
             subprocess.run([sys.executable, os.path.join(tools, "place_root.py"), sibling], check=True)
         if os.path.exists(os.path.join(robot_dir, "teleop_scene.xml")):

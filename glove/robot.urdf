@@ -3,7 +3,7 @@
   
   <link name="part_1">
     <inertial>
-      <origin xyz="0.0311547 0.0195917 0.00548311" rpy="0 0 0" /><mass value="0.122037" /><inertia ixx="9.61983e-05" ixy="-6.09386e-05" ixz="-1.373e-05" iyy="0.000356719" iyz="1.70901e-06" izz="0.000371182" /></inertial>
+      <origin xyz="0.0310784 0.0195374 0.00547114" rpy="0 0 0" /><mass value="0.121822" /><inertia ixx="9.57985e-05" ixy="-6.06458e-05" ixz="-1.36832e-05" iyy="0.000356125" iyz="1.7217e-06" izz="0.000370556" /></inertial>
     
     <visual>
       <origin xyz="-0.0136987 0.073 -0.025" rpy="3.14159 0 0" />

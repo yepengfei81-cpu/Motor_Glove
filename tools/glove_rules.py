@@ -8,6 +8,8 @@
   规则 1  同一编号的电机散件全部并成一个刚体（含 HORN：法兰当作电机的一部分，被驱动的零件绕它转）
   规则 2  两个刚体之间若有 >=2 个旋转/圆柱配合且轴线不重合（= 两个螺丝孔），它们是固定在一起的
           （两者之间若已有 dof_/closing_ 则不合并，只给出警告）
+  规则 4  装配体里被图钉固定（grounded）的实例焊到基座上（它们都不相对世界运动）
+  规则 5  电机和零件之间只有 1 个圆柱/旋转 + 1 个平行配合，且平行约束的方向和圆柱轴不同（转不动）-> 固定
 """
 import re
 from collections import defaultdict
@@ -140,4 +142,47 @@ def synthetic_mates(root):
             parent[find(a)] = find(b)
             log.append(f"规则2 固定: {name(a)} <-> {name(b)}  ({', '.join(fd['name'] for fd in lst)})")
             changed = True
+
+    # ---- 规则 4：装配体里被图钉固定（grounded）的实例 = 不相对世界运动 = 和基座焊在一起 ----
+    order = [i["id"] for i in root["instances"] if not i.get("suppressed")]
+    base = order[0] if order else None
+    for occ in root.get("occurrences", []):
+        if occ.get("fixed") and len(occ["path"]) == 1 and occ["path"][0] in parent and base is not None:
+            i = occ["path"][0]
+            if find(i) == find(base):
+                continue
+            out.append(fastened(f"auto_ground_{len(out)}", base, i))
+            mates.append(out[-1]["featureData"])
+            parent[find(i)] = find(base)
+            log.append(f"规则4 固定: {name(i)} 在装配体里被图钉固定 -> 焊到基座 {name(base)}")
+
+    # ---- 规则 5：电机和零件之间只有 1 个圆柱/旋转 + 1 个方向不同的平行配合（转不动）= 装死 ----
+    motor_ids = {i for i in inst if MOTOR_PART.match(inst[i]["name"])}
+    cyl, par, named = defaultdict(list), defaultdict(list), set()
+    for fd in mates:
+        ab = two_ends(fd)
+        if not ab or ab[0] not in parent or ab[1] not in parent:
+            continue
+        key = frozenset((find(ab[0]), find(ab[1])))
+        if len(key) < 2:
+            continue
+        if PREFIX.match(fd.get("name", "")):
+            named.add(key)
+        elif fd["mateType"] in ("REVOLUTE", "CYLINDRICAL"):
+            cyl[key].append(fd)
+        elif fd["mateType"] == "PARALLEL":
+            par[key].append(fd)
+    for key in cyl:
+        if key in named or key not in par:
+            continue
+        a, b = tuple(key)
+        if not any(find(m) in key for m in motor_ids):
+            continue
+        z_c, _ = world_axis(root, cyl[key][0]["matedEntities"][0])
+        z_p, _ = world_axis(root, par[key][0]["matedEntities"][0])
+        if abs(np.dot(z_c, z_p)) > 0.99:
+            continue                                   # 平行约束和圆柱轴同向：还能转，不是装死
+        out.append(fastened(f"auto_mount_{len(out)}", a, b))
+        parent[find(a)] = find(b)
+        log.append(f"规则5 固定: {name(a)} <-> {name(b)}  ({cyl[key][0]['name']} + {par[key][0]['name']}，平行约束和圆柱轴垂直，电机转不动)")
     return out, log

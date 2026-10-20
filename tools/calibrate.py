@@ -7,11 +7,13 @@
   python tools/calibrate.py thumb --no-viewer          # 不开仿真窗口（只看文字提示）
   python tools/calibrate.py ring --glove B --port /dev/ttyUSB0   # 第二只手套（从手），标定存到 config/calibration_B.json
 
-流程：
-  1. 仿真窗口显示零位；把这根手指摆到同样的姿态，回车 -> 记下零点
-  2. 逐个关节：往握拳方向转 20~40°（侧摆：向拇指一侧 10~20°），仿真窗口里会同步演示这个方向，
-     扶住回车 -> 算出电机方向；然后放回零位回车
-  3. 整根手指摆回零位，回车 -> 检查回零误差
+流程（默认逐个关节，每次只摆一个关节，其他关节放在哪都行，不会互相撞）：
+  对每个关节：
+  1. 只把这个关节摆到仿真窗口里的零位角度，扶稳回车 -> 记下它的零点
+  2. 往握拳方向转 20~40°（侧摆：向拇指一侧 10~20°），窗口里会演示方向，扶住回车 -> 算出电机方向
+  3. 放回零位回车 -> 检查回零误差；超过 3° 可以输入 r 重做这个关节
+  每个关节做完就立刻存盘，中途退出不会丢掉已经标好的关节。
+  python tools/calibrate.py thumb --whole-finger   # 旧流程：整根手指一起摆零位
 结果写进 config/calibration.json，之后 glove_live.py / force_feedback.py 用它把电机读数换成模型关节角。
 """
 import argparse
@@ -84,6 +86,59 @@ class Demo:
             time.sleep(0.2)
 
 
+def ask_sign(j, k, n, bus, i, zero_i, demo, direction):
+    """让用户把关节 j 往握拳 / 向拇指侧转，返回标定方向（只看这一个电机）"""
+    demo.show(j, direction)
+    span = "10~20°" if "_abd_" in j else "20~40°"
+    note = "（拇指以仿真窗口里的演示为准）" if j.startswith("thumb") else "（仿真窗口里在演示）"
+    while True:
+        ans = input(f"  [{k}/{n} · 2/3] 往 {gm.physical_positive(j)} 转 {span}{note}，扶住，按回车"
+                    f"\n        （演示方向不对或者真手套转不过去：输入 r 回车，演示反过来）... ").strip().lower()
+        if ans == "r":
+            direction = -direction
+            demo.show(j, direction)
+            print("        演示已反向，照窗口里的新方向转")
+            continue
+        now, _ = bus.read_avg(10)
+        d = wrap_ticks(round(now[i] - zero_i))
+        if abs(d) < (MIN_TICKS_ABD if "_abd_" in j else MIN_TICKS):
+            print(f"        只转了 {deg(d):+.1f}°，太小，再多转一些")
+            continue
+        sign = (1 if d > 0 else -1) * direction
+        print(f"        编码器 {'增大' if d > 0 else '减小'} {abs(deg(d)):.1f}° -> 标定方向 {sign:+d}")
+        return sign
+
+
+def per_joint(args, joints, ids, bus, demo, model_dir, axes):
+    """逐个关节标定：每次只摆这一个关节，其他关节放哪都行；每个关节做完立即存盘"""
+    n = len(joints)
+    for k, j in enumerate(joints, start=1):
+        i = ids[j]
+        while True:
+            demo.show(None)
+            print(f"\n== [{k}/{n}] {j}（ID {i}）==")
+            input(f"  [{k}/{n} · 1/3] 只把 {j} 摆到仿真窗口里的零位角度（其他关节放哪都行），扶稳，按回车 ...")
+            zero, noise = bus.read_avg(20)
+            print(f"        零点编码器 {zero[i]:.1f}   抖动 {noise[i]} tick")
+            sign = ask_sign(j, k, n, bus, i, zero[i], demo, model_dir[j])
+            demo.show(None)
+            input(f"  [{k}/{n} · 3/3] 把 {j} 放回零位，扶稳，按回车 ...")
+            back, _ = bus.read_avg(20)
+            e = deg(wrap_ticks(round(back[i] - zero[i])))
+            if abs(e) < 3:
+                print(f"        回零误差 {e:+.1f}°")
+                break
+            ans = input(f"        回零误差 {e:+.1f}°，偏大。输入 r 回车重做这个关节，直接回车接受 ... ").strip().lower()
+            if ans != "r":
+                break
+        cal = load_calibration(args.glove)
+        cal["joints"][j] = {"id": i, "zero_raw": round(zero[i]), "sign": sign, "axis_base": axes[j]}
+        save_calibration(cal, args.glove)
+        print(f"        已存到 {os.path.relpath(calib_path(args.glove))}")
+    print(f"\n* {args.finger} 的 {n} 个关节都标好了。" + ("接着运行  python tools/glove_live.py  看仿真里的手是否跟着动" if args.glove == "A"
+          else "接着用  python tools/twin_jog.py  和手套 A 逐个关节对照"))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("finger", choices=list(gm.FINGERS))
@@ -91,6 +146,7 @@ def main():
     ap.add_argument("--no-viewer", action="store_true")
     ap.add_argument("--glove", default="A", help="手套名：A = 戴在手上的（默认），B = 从手")
     ap.add_argument("--port", default=None, help="串口，默认自动（有 U2D2 用 ttyUSB0，否则 ttyACM0）")
+    ap.add_argument("--whole-finger", action="store_true", help="旧流程：整根手指一起摆零位，再逐个关节定方向")
     args = ap.parse_args()
     joints = [j for j in gm.FINGERS[args.finger] if not args.joint or j in args.joint]
     if not joints:
@@ -106,6 +162,13 @@ def main():
     bus.torque_off()
     demo = Demo(args.finger, not args.no_viewer)
     print(f"* {args.finger}: " + ", ".join(f"{j}=ID {i}" for j, i in ids.items()) + "，扭矩已关闭，可以用手掰\n")
+    if not args.whole_finger:
+        try:
+            per_joint(args, joints, ids, bus, demo, model_dir, axes)
+        finally:
+            demo.close()
+            bus.close()
+        return
     try:
         demo.show(None)
         input(f"[1/3] 仿真窗口里是零位。把 {args.finger} 摆成同样的姿态，扶稳，按回车 ...")

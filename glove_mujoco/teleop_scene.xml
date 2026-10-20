@@ -19,7 +19,7 @@
         <light pos="0 0 3.5" dir="0 0 -1" directional="true" />
         <geom name="floor" size="0 0 0.05" pos="0 0 0" type="plane" material="groundplane" />
         <!-- 方块：固定在手心前方，先用静态的；要让它能被抓起来再给它加 freejoint -->
-        <body name="cube" pos="0.0311 0.0076 0.0116">
+        <body name="cube" pos="0.0301 0.0097 0.0116">
             <geom name="cube" type="box" size="0.0200 0.0200 0.0116" rgba="0.9 0.35 0.2 1" contype="2" conaffinity="1" />
         </body>
     </worldbody>

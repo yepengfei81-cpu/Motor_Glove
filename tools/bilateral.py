@@ -62,6 +62,10 @@ def main():
     ap.add_argument("--log", default=None, help="把每个周期的数据存成 CSV")
     ap.add_argument("--follower-kp", type=int, default=None, help="从手位置环 P 增益（电机默认 400；低 = 软，高 = 硬），会记进 CSV")
     ap.add_argument("--follower-kd", type=int, default=None, help="从手位置环 D 增益（默认 0）")
+    ap.add_argument("--gain", action="append", default=[], metavar="NAME=KP[,KD]",
+                    help="单独给某些关节设从手 P/D 增益，NAME 是关节名或前缀，例如 --gain thumb=600,60 --gain index_pip_motor=900")
+    ap.add_argument("--cmd-lpf", type=float, default=0.0,
+                    help="从手目标角度的低通 Hz：滤掉主手编码器量化和手抖，减小从手抖动（0 = 关；试 10–15）")
     ap.add_argument("--adaptive-kp", type=int, nargs=2, metavar=("KP_MAX", "KP_MIN"), default=None,
                     help="方法 3：从手 P 增益随接触电流变化。空中 = KP_MAX，接触电流(滑动平均)达到 --adapt-ref 时降到 KP_MIN，例如 600 100")
     ap.add_argument("--adapt-ref", type=float, default=150, help="接触电流参考值 mA（滑动平均到这个值时刚度降到 KP_MIN，默认 150）")
@@ -146,6 +150,20 @@ def main():
             if follower is not None:
                 follower.enter_position_mode(args.follower_limit)
                 follower.set_position_gains(kp0, args.follower_kd)
+                for g in args.gain:
+                    name, _, val = g.partition("=")
+                    kp_s, _, kd_s = val.partition(",")
+                    hit = [j for j in joints if j.startswith(name)]
+                    if not hit:
+                        print(f"!! --gain {g}: 没有关节名以 {name} 开头")
+                    for j in hit:
+                        if kp_s:
+                            follower.pkt.write2ByteTxRx(follower.port, ids[j], 84, int(kp_s))
+                            kp_cmd[j] = kp_written[j] = float(kp_s)
+                        if kd_s:
+                            follower.pkt.write2ByteTxRx(follower.port, ids[j], 80, int(kd_s))
+                    if hit:
+                        print(f"* 从手增益 {', '.join(hit)}: P {kp_s or '不变'}，D {kd_s or '不变'}")
                 # 从手用 1.5 s 从自己现在的姿态滑到主手当前姿态：两只手套开始时不需要摆成一样，也不需要在零位
                 qA0 = leader_angles(leader.read_state())
                 raw = follower.read_raw()
@@ -169,7 +187,9 @@ def main():
         period = 1.0 / args.hz
         t0 = time.time(); t_prev, t_report, t_wd, n_loop = 0.0, t0, t0, 0
         t_gain = t0
-        vA = vB = float("nan")
+        vA = leader.voltage()
+        vB = follower.voltage() if follower is not None else float("nan")
+        q_cmd = None                                   # 低通后的从手目标
         tau_f = {j: 0.0 for j in joints}
         gate = {j: 0.0 for j in joints}                # 连续门控 0–1：从手电流大且几乎不动 = 被挡住
         contact = {j: False for j in joints}
@@ -193,7 +213,13 @@ def main():
             if stB is not None:
                 qB = {j: sB[j] * ticks_to_rad(stB[ids[j]][2] - zB[j]) for j in joints}
                 if not args.dry_run:
-                    follower.write_positions(follower_goal_ticks(qA))
+                    if args.cmd_lpf > 0:
+                        dt_c = (t_loop - t_prev) if t_prev else period
+                        a_c = dt_c / (dt_c + 1 / (2 * math.pi * args.cmd_lpf))
+                        q_cmd = dict(qA) if q_cmd is None else {j: q_cmd[j] + a_c * (qA[j] - q_cmd[j]) for j in joints}
+                        follower.write_positions(follower_goal_ticks(q_cmd))
+                    else:
+                        follower.write_positions(follower_goal_ticks(qA))
             else:
                 qB = dict(qA)
             ramp = min(1.0, (t_loop - t0) / 1.5)
@@ -222,9 +248,9 @@ def main():
                 if stB is None or args.contact_ma <= 0:
                     g = 1.0
                 else:
-                    iB = abs(stB[ids[j]][0]); vB = abs(stB[ids[j]][1])
+                    iB = abs(stB[ids[j]][0]); velB = abs(stB[ids[j]][1])
                     g_i = min(1.0, max(0.0, (iB - 0.5 * args.contact_ma) / (0.5 * args.contact_ma)))        # 电流：半值开始，全值全开
-                    g_v = min(1.0, max(0.0, (args.contact_vel - vB) / (0.75 * args.contact_vel)))          # 速度：不动全开，快动关闭
+                    g_v = min(1.0, max(0.0, (args.contact_vel - velB) / (0.75 * args.contact_vel)))          # 速度：不动全开，快动关闭
                     g = g_i * g_v
                 a_g = dt / (dt + 0.05)                                                                      # 50 ms 低通，渐入渐出不抖
                 gate[j] += a_g * (g - gate[j])
@@ -240,9 +266,9 @@ def main():
                 tau_f[j] += alpha * (t - tau_f[j])
                 ff = 0.0
                 if args.friction_ma > 0:                                   # 摩擦补偿：顺着主手运动方向；|v| < 0.15 rad/s 不补，免得静止时抖
-                    vA = sA[j] * stA[ids[j]][1]
+                    velA = sA[j] * stA[ids[j]][1]
                     v0 = 0.15
-                    ff = args.friction_ma * math.tanh((abs(vA) - v0) / 0.3) * math.copysign(1, vA) * ramp if abs(vA) > v0 else 0.0
+                    ff = args.friction_ma * math.tanh((abs(velA) - v0) / 0.3) * math.copysign(1, velA) * ramp if abs(velA) > v0 else 0.0
                 cur[ids[j]] = float(np.clip(sA[j] * (tau_f[j] / KT[models[j]] * 1000 + ff), -args.leader_limit, args.leader_limit))
             total = sum(abs(v) for v in cur.values())
             if total > args.budget:

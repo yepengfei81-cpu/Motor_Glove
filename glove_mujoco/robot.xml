@@ -18,7 +18,7 @@
   </default>
   <worldbody>
     <!-- Link part_1 -->
-    <body name="part_1" pos="-0.00931137 -0.0473435 0.119223" quat="0.534748 -0.414896 -0.572591 0.462649" childclass="glove"><!-- orig_pose: 0 0 0;1 0 0 0 -->
+    <body name="part_1" pos="-0.00741612 -0.0472824 0.119223" quat="0.522225 -0.399484 -0.583448 0.476741" childclass="glove"><!-- orig_pose: 0 0 0;1 0 0 0 -->
       <inertial pos="0 0 0" mass="1e-09" fullinertia="1e-09 1e-09 1e-09 0 0 0"/>
       <!-- Part part_1 -->
       <geom type="mesh" class="visual" pos="-0.0136987 0.073 -0.025" quat="0 1 0 -0" mesh="part_1" material="part_1_material"/>
@@ -962,48 +962,48 @@
     </body>
   </worldbody>
   <asset>
-    <mesh file="part_1__6.stl"/>
-    <mesh file="part_1__20.stl"/>
-    <mesh file="dc15_a01_case_m_dummy.stl"/>
-    <mesh file="phs_1_7x20_5_dc10_2.stl"/>
-    <mesh file="part_1__24.stl"/>
-    <mesh file="part_1__2.stl"/>
-    <mesh file="dc15_a01_led_cap2_dummy.stl"/>
-    <mesh file="part_1__22.stl"/>
-    <mesh file="part_1__13.stl"/>
-    <mesh file="bts2_m2_6x8_1.stl"/>
-    <mesh file="dc15_a01_idle_cap_dummy.stl"/>
-    <mesh file="part_1__3.stl"/>
     <mesh file="part_1__18.stl"/>
-    <mesh file="part_1__14.stl"/>
-    <mesh file="part_1__7.stl"/>
-    <mesh file="part_1__19.stl"/>
-    <mesh file="phs_1_7x20_5_dc10_3.stl"/>
-    <mesh file="part_1__15.stl"/>
-    <mesh file="phs_1_7x20_5_dc10.stl"/>
-    <mesh file="part_1__26.stl"/>
-    <mesh file="part_1__8.stl"/>
-    <mesh file="dc15_a01_horn_dummy.stl"/>
-    <mesh file="part_1__9.stl"/>
-    <mesh file="b3b_eh_1.stl"/>
-    <mesh file="part_1__23.stl"/>
-    <mesh file="part_1__12.stl"/>
-    <mesh file="b3b_eh.stl"/>
-    <mesh file="dc15_a01_case_f_dummy.stl"/>
-    <mesh file="part_1__4.stl"/>
-    <mesh file="part_1__11.stl"/>
-    <mesh file="part_1__21.stl"/>
-    <mesh file="part_1__27.stl"/>
-    <mesh file="part_1__5.stl"/>
-    <mesh file="part_1__25.stl"/>
-    <mesh file="dc15_a01_horn_idle2_dummy.stl"/>
-    <mesh file="part_1__16.stl"/>
+    <mesh file="part_1__20.stl"/>
     <mesh file="dc15_a01_case_b_dummy.stl"/>
-    <mesh file="part_1__10.stl"/>
-    <mesh file="part_1.stl"/>
+    <mesh file="part_1__22.stl"/>
+    <mesh file="b3b_eh_1.stl"/>
     <mesh file="phs_1_7x20_5_dc10_1.stl"/>
-    <mesh file="bts2_m2_6x8.stl"/>
+    <mesh file="part_1__24.stl"/>
+    <mesh file="part_1__25.stl"/>
+    <mesh file="part_1__6.stl"/>
+    <mesh file="part_1__7.stl"/>
+    <mesh file="part_1__8.stl"/>
+    <mesh file="part_1__5.stl"/>
+    <mesh file="bts2_m2_6x8_1.stl"/>
+    <mesh file="part_1.stl"/>
+    <mesh file="part_1__10.stl"/>
+    <mesh file="part_1__23.stl"/>
+    <mesh file="phs_1_7x20_5_dc10_3.stl"/>
+    <mesh file="part_1__12.stl"/>
+    <mesh file="part_1__27.stl"/>
+    <mesh file="part_1__3.stl"/>
+    <mesh file="part_1__15.stl"/>
+    <mesh file="dc15_a01_led_cap2_dummy.stl"/>
+    <mesh file="b3b_eh.stl"/>
+    <mesh file="part_1__2.stl"/>
+    <mesh file="dc15_a01_horn_idle2_dummy.stl"/>
+    <mesh file="part_1__21.stl"/>
+    <mesh file="part_1__16.stl"/>
     <mesh file="part_1__17.stl"/>
+    <mesh file="part_1__13.stl"/>
+    <mesh file="phs_1_7x20_5_dc10_2.stl"/>
+    <mesh file="part_1__26.stl"/>
+    <mesh file="dc15_a01_idle_cap_dummy.stl"/>
+    <mesh file="phs_1_7x20_5_dc10.stl"/>
+    <mesh file="part_1__11.stl"/>
+    <mesh file="dc15_a01_case_m_dummy.stl"/>
+    <mesh file="dc15_a01_case_f_dummy.stl"/>
+    <mesh file="bts2_m2_6x8.stl"/>
+    <mesh file="part_1__19.stl"/>
+    <mesh file="dc15_a01_horn_dummy.stl"/>
+    <mesh file="part_1__4.stl"/>
+    <mesh file="part_1__9.stl"/>
+    <mesh file="part_1__14.stl"/>
     <material name="part_1_material" rgba="0.615686 0.811765 0.929412 1"/>
     <material name="dc15_a01_case_m_dummy_material" rgba="0.231373 0.380392 0.705882 1"/>
     <material name="phs_1_7x20_5_dc10_material" rgba="0.980392 0.713725 0.00392157 1"/>

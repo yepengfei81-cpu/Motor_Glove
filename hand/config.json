@@ -1,0 +1,7 @@
+{
+  "url": "https://cad.onshape.com/documents/774967842564538ef4982330/w/4023b19c6157ef52fd29a270/e/354ca377a02ac931bee7d6e2",
+  "output_format": "urdf",
+  "robot_name": "hand",
+  "root_pose_mode": "palm_down",
+  "root_clearance": 0.015
+}

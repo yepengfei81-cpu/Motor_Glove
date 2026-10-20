@@ -37,13 +37,21 @@ def main(robot_dir):
         s = joint_re(j).sub(r"\1\2", s)
     open(path, "w", encoding="utf-8").write(s)
 
+    scene = os.path.join(robot_dir, "teleop_scene.xml")
+    m = mujoco.MjModel.from_xml_path(scene if os.path.exists(scene) else path)
+    present = {j: mt for j, mt in DISTAL.items() if mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, j) >= 0}
+    if not present:                                    # 没有连杆被动关节（例如直驱的机械手）：只加积分器
+        if '<option integrator="implicitfast"/>' not in s:
+            s = re.sub(r'(<compiler [^>]*/>)', r'\1\n  <option integrator="implicitfast"/>', s, count=1)
+        open(path, "w", encoding="utf-8").write(s)
+        print("* 没有连杆被动关节，跳过远端限位；积分器 implicitfast")
+        return
     model_dir = gm.directions(refresh=True)
-    m = mujoco.MjModel.from_xml_path(gm.SCENE)
     d = mujoco.MjData(m)
     m.opt.disableflags = int(m.opt.disableflags) | int(mujoco.mjtDisableBit.mjDSBL_CONTACT)
     act = {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_ACTUATOR, i): i for i in range(m.nu)}
     ranges = {}
-    for j, motor in DISTAL.items():
+    for j, motor in present.items():
         mujoco.mj_resetData(m, d)
         d.ctrl[act[motor]] = model_dir[motor] * 0.3       # 电机往"弯曲"转一点，看远端关节往哪边变
         for _ in range(1000):

@@ -1,0 +1,3585 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="hand">
+  
+  <link name="part_1">
+    <inertial>
+      <origin xyz="0.0327 0.0232236 0.00523213" rpy="0 0 0" /><mass value="0.170903" /><inertia ixx="0.000113122" ixy="-8.335e-05" ixz="-2.61062e-05" iyy="0.000460434" iyz="-1.7726e-06" izz="0.000448195" /></inertial>
+    
+    <visual>
+      <origin xyz="0.0290881 0.00558999 0.00992" rpy="-1.5708 -0 0.0872665" />
+      <geometry>
+        <mesh filename="package://assets/part_1.stl" />
+      </geometry>
+      <material name="part_1_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0290881 0.00558999 0.00992" rpy="-1.5708 -0 0.0872665" />
+      <geometry>
+        <mesh filename="package://assets/part_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0136987 0.073 -0.025" rpy="3.14159 0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl" />
+      </geometry>
+      <material name="part_1_2_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0136987 0.073 -0.025" rpy="3.14159 0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0136987 0.073 -0.025" rpy="3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__3.stl" />
+      </geometry>
+      <material name="part_1_3_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0136987 0.073 -0.025" rpy="3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0127185 0.0319766 0.0240502" rpy="-0.392649 0.441619 -0.621325" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_2_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_2_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_2_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_2_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_2_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_2_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_2_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_2_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_2_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0335371 0.0201612 -0.01458" rpy="-1.5708 0 1.65806" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_3_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_3_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_3_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_3_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_3_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_3_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_3_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_3_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_3_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0171987 0.016 -0.0185" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_4_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_4_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_4_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_4_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_4_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_4_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_4_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_4_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_4_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_4_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_4_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0993404 0.0515868 -0.00739388" rpy="-3.14159 -1.24905 -2.53073" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="dc15_a01_case_m_dummy">
+    <inertial>
+      <origin xyz="0.00113052 -0.0229789 -0.0239765" rpy="0 0 0" /><mass value="0.0326139" /><inertia ixx="5.79384e-06" ixy="4.11238e-08" ixz="1.5295e-07" iyy="6.01458e-06" iyz="-7.88019e-07" izz="5.45781e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0.021 -0.0362499 -0.0398" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__4.stl" />
+      </geometry>
+      <material name="part_1_4_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.021 -0.0362499 -0.0398" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__4.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.00999988 -0.02805" rpy="-1.5708 -1.1988 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/part_1__5.stl" />
+      </geometry>
+      <material name="part_1_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.00999988 -0.02805" rpy="-1.5708 -1.1988 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/part_1__5.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_5_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_5_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_5_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_5_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_5_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_5_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_5_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_5_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_5_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_5_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_5_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00475 -0.0164999 -0.02805" rpy="-1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="dc15_a01_case_m_dummy_2">
+    <inertial>
+      <origin xyz="-0.000219281 -0.0188158 -0.0127556" rpy="0 0 0" /><mass value="0.0219539" /><inertia ixx="3.26857e-06" ixy="7.05106e-10" ixz="5.15398e-10" iyy="2.15668e-06" iyz="-1.98776e-08" izz="3.63006e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.0115 -0.03 -0" rpy="-3.14159 0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__6.stl" />
+      </geometry>
+      <material name="part_1_6_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0115 -0.03 -0" rpy="-3.14159 0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__6.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_6_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_6_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_6_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_6_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_6_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_6_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_6_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_6_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_6_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_6_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_6_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_6_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_6_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.027573 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="part_1_2">
+    <inertial>
+      <origin xyz="0.0210904 0.00102491 -0.0218441" rpy="0 0 0" /><mass value="0.00887149" /><inertia ixx="2.00201e-06" ixy="-1.18943e-07" ixz="4.11494e-07" iyy="3.86582e-06" iyz="-3.50779e-08" izz="2.77559e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0.0581699 -0.0125 -0.038" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__7.stl" />
+      </geometry>
+      <material name="part_1_7_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0581699 -0.0125 -0.038" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__7.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="ring_pip_motor" type="revolute">
+    <origin xyz="0.019 -0.027573 -0.0125" rpy="-1.5708 -0.00489428 -1.5708" />
+    <parent link="dc15_a01_case_m_dummy_2" />
+    <child link="part_1_2" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="ring_mcp_abd_motor" type="revolute">
+    <origin xyz="-0.00475 -0.00999988 -0.02805" rpy="1.5708 -1.5708 0" />
+    <parent link="dc15_a01_case_m_dummy" />
+    <child link="dc15_a01_case_m_dummy_2" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="ring_mcp_flex_motor" type="revolute">
+    <origin xyz="0.0942892 0.0480499 -0.00944936" rpy="-0 1.24905 0.610865" />
+    <parent link="part_1" />
+    <child link="dc15_a01_case_m_dummy" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <link name="part_1_3">
+    <inertial>
+      <origin xyz="0.00443147 0.0230868 -0.0212294" rpy="0 0 0" /><mass value="0.0286079" /><inertia ixx="4.2487e-06" ixy="-1.23337e-07" ixz="2.55736e-07" iyy="4.73701e-06" iyz="6.59072e-07" izz="5.15006e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0.0245 0.0362499 -0.0115" rpy="1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__8.stl" />
+      </geometry>
+      <material name="part_1_8_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0245 0.0362499 -0.0115" rpy="1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_7_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_7_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_7_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_7_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_7_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_7_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_7_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_7_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_7_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_7_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_7_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_7_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_7_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.00125 0.0164999 -0.02325" rpy="1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="dc15_a01_case_m_dummy_3">
+    <inertial>
+      <origin xyz="2.45453e-05 -0.0201989 -0.0125644" rpy="0 0 0" /><mass value="0.0230603" /><inertia ixx="3.7611e-06" ixy="-1.07759e-08" ixz="-9.74581e-10" iyy="2.23736e-06" iyz="-8.56029e-08" izz="4.16709e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.0115 -0.03 0" rpy="-3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__9.stl" />
+      </geometry>
+      <material name="part_1_9_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0115 -0.03 0" rpy="-3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__9.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_8_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_8_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_8_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_8_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_8_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_8_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_8_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_8_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_8_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_8_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_8_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_8_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_8_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.00775 -0.03 -0.0125" rpy="3.14159 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="part_1_4">
+    <inertial>
+      <origin xyz="0.0219622 -0.000977568 -0.0118472" rpy="0 0 0" /><mass value="0.00505791" /><inertia ixx="7.449e-07" ixy="1.17649e-07" ixz="-1.07886e-08" iyy="1.23523e-06" iyz="3.85387e-10" izz="1.05665e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0.0411699 0.0125 0.028" rpy="1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__10.stl" />
+      </geometry>
+      <material name="part_1_10_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0411699 0.0125 0.028" rpy="1.5708 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__10.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="index_pip_motor" type="revolute">
+    <origin xyz="-0.012 -0.03 -0.0125" rpy="1.5708 -0 -1.5708" />
+    <parent link="dc15_a01_case_m_dummy_3" />
+    <child link="part_1_4" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="index_mcp_abd_motor" type="revolute">
+    <origin xyz="-0.00125 0.00999988 -0.02325" rpy="-1.5708 1.5708 0" />
+    <parent link="part_1_3" />
+    <child link="dc15_a01_case_m_dummy_3" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="index_mcp_flex_motor" type="revolute">
+    <origin xyz="-0.0106987 0.016 -0.0185" rpy="3.14159 1.5708 0" />
+    <parent link="part_1" />
+    <child link="part_1_3" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <link name="dc15_a01_case_m_dummy_4">
+    <inertial>
+      <origin xyz="0.0348094 0.000357822 -0.0369962" rpy="0 0 0" /><mass value="0.0284274" /><inertia ixx="7.03338e-06" ixy="-9.6608e-07" ixz="1.75174e-06" iyy="9.33297e-06" iyz="1.12625e-06" izz="6.40584e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0.033452 -0.0349 -0.0535" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__11.stl" />
+      </geometry>
+      <material name="part_1_11_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.033452 -0.0349 -0.0535" rpy="-1.5708 -1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__11.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_9_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_9_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_9_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_9_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_9_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_9_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_9_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_9_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_9_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_9_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_9_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_9_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_9_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0370085 0.00490023 -0.030773" rpy="1.309 0 -2.44346" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="part_1_5">
+    <inertial>
+      <origin xyz="-0.026836 -0.0263096 -0.0172023" rpy="0 0 0" /><mass value="0.0272383" /><inertia ixx="5.62495e-06" ixy="-6.52259e-07" ixz="-4.14842e-07" iyy="4.17632e-06" iyz="-8.57465e-07" izz="6.58911e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.0085 -0.013 0" rpy="3.14159 0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__12.stl" />
+      </geometry>
+      <material name="part_1_12_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0085 -0.013 0" rpy="3.14159 0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__12.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_10_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_10_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_10_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_10_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_10_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_10_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_10_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_10_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_10_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_10_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_10_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_10_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_10_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.018 -0.023 -0.0195" rpy="0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="dc15_a01_case_m_dummy_5">
+    <inertial>
+      <origin xyz="-0.0007784 0.0198171 -0.0157482" rpy="0 0 0" /><mass value="0.021947" /><inertia ixx="3.95704e-06" ixy="-2.38795e-07" ixz="1.18362e-08" iyy="2.11406e-06" iyz="1.02844e-07" izz="3.39509e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0 0 -0.0019" rpy="3.14159 -0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__13.stl" />
+      </geometry>
+      <material name="part_1_13_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0019" rpy="3.14159 -0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__13.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_11_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_11_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_11_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_11_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_11_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_11_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_11_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_11_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_11_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_11_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_11_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_11_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_11_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="4.37353e-07 0.029001 -0.02365" rpy="3.14159 0 3.14159" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="part_1_6">
+    <inertial>
+      <origin xyz="-0.0013053 0.0183708 0.0114227" rpy="0 0 0" /><mass value="0.00412979" /><inertia ixx="8.14183e-07" ixy="6.97022e-08" ixz="-6.45022e-10" iyy="5.00933e-07" iyz="9.34759e-09" izz="5.8891e-07" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.012 0.0310566 0.02505" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__14.stl" />
+      </geometry>
+      <material name="part_1_14_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.012 0.0310566 0.02505" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__14.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="thumb_ip_motor" type="revolute">
+    <origin xyz="4.37353e-07 0.029001 -0.00435" rpy="3.14159 0 3.14159" />
+    <parent link="dc15_a01_case_m_dummy_5" />
+    <child link="part_1_6" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="thumb_mcp_flex_motor" type="revolute">
+    <origin xyz="-0.0145 -0.023 -0.0195" rpy="-3.14159 1.5708 0" />
+    <parent link="part_1_5" />
+    <child link="dc15_a01_case_m_dummy_5" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="thumb_cmc_flex_motor" type="revolute">
+    <origin xyz="0.0329728 0.00970986 -0.0290907" rpy="-1.8326 0 -2.44346" />
+    <parent link="dc15_a01_case_m_dummy_4" />
+    <child link="part_1_5" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="thumb_cmc_abd_motor" type="revolute">
+    <origin xyz="-0.00918372 0.0325048 0.0294794" rpy="-2.55947 -0.00973433 1.73392" />
+    <parent link="part_1" />
+    <child link="dc15_a01_case_m_dummy_4" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <link name="dc15_a01_case_m_dummy_6">
+    <inertial>
+      <origin xyz="-0.0299575 -0.0131071 -0.0131226" rpy="0 0 0" /><mass value="0.0237321" /><inertia ixx="3.34928e-06" ixy="-3.49941e-07" ixz="1.39443e-08" iyy="3.08642e-06" iyz="5.22183e-09" izz="4.47198e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="0 0 -0.0277" rpy="-0 -0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__15.stl" />
+      </geometry>
+      <material name="part_1_15_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0277" rpy="-0 -0 -0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__15.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0155915 -0.007281 -0.0131" rpy="-1.5708 -1.45033 1.5708" />
+      <geometry>
+        <mesh filename="package://assets/part_1__5.stl" />
+      </geometry>
+      <material name="part_1_16_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0155915 -0.007281 -0.0131" rpy="-1.5708 -1.45033 1.5708" />
+      <geometry>
+        <mesh filename="package://assets/part_1__5.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_12_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_12_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_12_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_12_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_12_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_12_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_12_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_12_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_12_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_12_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_12_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_12_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_12_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0220915 -0.007281 -0.0131" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="dc15_a01_case_m_dummy_7">
+    <inertial>
+      <origin xyz="-0.000224981 -0.0253546 -0.0119726" rpy="0 0 0" /><mass value="0.0225383" /><inertia ixx="3.44797e-06" ixy="2.89851e-10" ixz="-3.03324e-09" iyy="2.23548e-06" iyz="-2.15473e-07" izz="3.76074e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.038 -0.03 0" rpy="-3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__16.stl" />
+      </geometry>
+      <material name="part_1_17_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.038 -0.03 0" rpy="-3.14159 -0 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__16.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+      <material name="b3b_eh_1_13_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_idle_cap_dummy_13_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_idle_cap_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_dummy_13_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+      <material name="b3b_eh_13_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/b3b_eh.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_f_dummy_13_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_f_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_b_dummy_13_material">
+        <color rgba="0.768627 0.886275 0.952941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_b_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_3_13_material">
+        <color rgba="0.972549 0.529412 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_3.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_horn_idle2_dummy_13_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_horn_idle2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_13_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_case_m_dummy_13_material">
+        <color rgba="0.231373 0.380392 0.705882 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_case_m_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+      <material name="dc15_a01_led_cap2_dummy_13_material">
+        <color rgba="0.498039 0.498039 0.498039 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/dc15_a01_led_cap2_dummy.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_1_13_material">
+        <color rgba="0.647059 0.647059 0.647059 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+      <material name="bts2_m2_6x8_1_13_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/bts2_m2_6x8_1.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_2_13_material">
+        <color rgba="0.917647 0.917647 0.917647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10_2.stl" />
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+      <material name="phs_1_7x20_5_dc10_13_material">
+        <color rgba="0.980392 0.713725 0.00392157 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.008 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/phs_1_7x20_5_dc10.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link name="part_1_7">
+    <inertial>
+      <origin xyz="0.00120706 0.0239907 0.00958202" rpy="0 0 0" /><mass value="0.00584722" /><inertia ixx="1.51728e-06" ixy="-1.42936e-07" ixz="6.01792e-10" iyy="8.67209e-07" iyz="1.16396e-08" izz="1.32623e-06" /></inertial>
+    
+    <visual>
+      <origin xyz="-0.0125 0.0444199 0.02275" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__17.stl" />
+      </geometry>
+      <material name="part_1_18_material">
+        <color rgba="0.615686 0.811765 0.929412 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.0125 0.0444199 0.02275" rpy="-0 1.5708 0" />
+      <geometry>
+        <mesh filename="package://assets/part_1__17.stl" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="mid_pip_motor" type="revolute">
+    <origin xyz="0.0095 -0.034323 -0.0125" rpy="-3.14159 1.5708 0" />
+    <parent link="dc15_a01_case_m_dummy_7" />
+    <child link="part_1_7" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="mid_mcp_abd_motor" type="revolute">
+    <origin xyz="-0.0155915 -0.007281 -0.0131" rpy="0 -1.5708 0" />
+    <parent link="dc15_a01_case_m_dummy_6" />
+    <child link="dc15_a01_case_m_dummy_7" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+  
+  <joint name="mid_mcp_motor" type="revolute">
+    <origin xyz="0.0545568 0.0220002 -0.01458" rpy="1.5708 0 1.65806" />
+    <parent link="part_1" />
+    <child link="dc15_a01_case_m_dummy_6" />
+    <axis xyz="0 0 1" />
+    <limit effort="10" velocity="10" lower="-3.141592653589793" upper="3.141592653589793" />
+  </joint>
+</robot>

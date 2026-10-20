@@ -214,10 +214,25 @@ def main():
     orphans = all_bodies - reached
     print(f"* 刚体（合并后）{len(all_bodies)} 个，其中从 base 沿 dof_ 能到达 {len(reached)} 个")
     if orphans:
+        problems.append(f"{len(orphans)} 个刚体没有被 dof_ 接进来，导出后会被焊死在基座上（对应的手指不能动）")
         print(f"!! 下面 {len(orphans)} 个刚体没有被任何 dof_ 接进来，导出时会被固定到基座上：")
         for b in sorted(orphans, key=bname):
             print(f"    - {bname(b)}")
     print()
+
+    if orphans:
+        print("* 每个 dof_ 连接的两个刚体（* = 从 base 到不了）:")
+        for n, t, ba, bb in sorted(dofs):
+            print(f"    {joint_name(n):24s} {bname(ba)}{' *' if ba in orphans else ''}  <->  {bname(bb)}{' *' if bb in orphans else ''}")
+        print("* 孤立刚体身上的所有配合:")
+        for b in sorted(orphans, key=bname):
+            touching = [m for m in mates if m["a"] in body_of and m["b"] in body_of and b in (body_of[m["a"]], body_of[m["b"]])
+                        and body_of[m["a"]] != body_of[m["b"]]]
+            print(f"    [{bname(b)}]")
+            for m in touching:
+                other = body_of[m["b"]] if body_of[m["a"]] == b else body_of[m["a"]]
+                print(f"        「{m['name']}」 {m['type']:12s} -> {bname(other)}")
+        print()
 
     # ---- 没有前缀的旋转/圆柱 ----
     forgotten = [(n, t, ba, bb) for n, t, ba, bb in unnamed_rot if ba in orphans or bb in orphans]

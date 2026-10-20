@@ -124,7 +124,7 @@ def main():
     if "root_pose" in cfg:
         pose = dict(cfg["root_pose"]); pose["source"] = "config.json"
     else:
-        src = xml if mj_dir else os.path.join(os.path.dirname(d.rstrip("/")) or ".", "glove_mujoco", "robot.xml")
+        src = xml if mj_dir else os.path.join(os.path.dirname(d.rstrip("/")) or ".", os.path.basename(d.rstrip("/")) + "_mujoco", "robot.xml")
         if not os.path.exists(src):
             raise SystemExit("需要先导出 MuJoCo 模型才能自动计算姿态，或在 config.json 里写 root_pose")
         pose = auto_pose(src, cfg.get("root_pose_mode", "palm_front"), cfg.get("root_clearance", 0.01))
