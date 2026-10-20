@@ -41,13 +41,12 @@ def deg(ticks):
 class Demo:
     """后台线程：仿真窗口里让当前关节在零位和"握拳/向拇指侧"方向之间来回动，演示要你转的方向"""
 
-    def __init__(self, finger, use_viewer):
-        self.m = mujoco.MjModel.from_xml_path(gm.SCENE)
+    def __init__(self, finger, use_viewer, scene=gm.SCENE):
+        self.m = mujoco.MjModel.from_xml_path(scene)
         self.d = mujoco.MjData(self.m)
         self.m.opt.disableflags = int(self.m.opt.disableflags) | int(mujoco.mjtDisableBit.mjDSBL_CONTACT)
         self.act = {mujoco.mj_id2name(self.m, mujoco.mjtObj.mjOBJ_ACTUATOR, i): i for i in range(self.m.nu)}
-        tip = mujoco.mj_name2id(self.m, mujoco.mjtObj.mjOBJ_JOINT, gm.TIP_JOINT[finger])
-        self.tip_body = self.m.jnt_bodyid[tip]
+        self.tip_body = gm.tip_body(self.m, finger)
         self.joint, self.direction, self.running, self.t_start = None, 1, True, time.time()
         self.viewer = mujoco.viewer.launch_passive(self.m, self.d) if use_viewer else None
         if self.viewer is not None:
@@ -147,6 +146,7 @@ def main():
     ap.add_argument("--glove", default="A", help="手套名：A = 戴在手上的（默认），B = 从手")
     ap.add_argument("--port", default=None, help="串口，默认自动（有 U2D2 用 ttyUSB0，否则 ttyACM0）")
     ap.add_argument("--whole-finger", action="store_true", help="旧流程：整根手指一起摆零位，再逐个关节定方向")
+    ap.add_argument("--model", choices=list(gm.MODELS), default="glove", help="仿真窗口和方向用哪个模型：glove（手套）/ hand（直驱机械手）")
     args = ap.parse_args()
     joints = [j for j in gm.FINGERS[args.finger] if not args.joint or j in args.joint]
     if not joints:
@@ -156,11 +156,12 @@ def main():
     if missing:
         sys.exit(f"这些关节还没设 ID: {missing}。先运行  python tools/dxl_setup.py set <关节名>")
     ids = {j: reg[j] for j in joints}
-    model_dir = gm.directions()
-    axes = gm.joint_axes()
+    scene = gm.scene_of(args.model)
+    model_dir = gm.directions(scene)
+    axes = gm.joint_axes(scene)
     bus = Bus(ids.values(), port=args.port)
     bus.torque_off()
-    demo = Demo(args.finger, not args.no_viewer)
+    demo = Demo(args.finger, not args.no_viewer, scene)
     print(f"* {args.finger}: " + ", ".join(f"{j}=ID {i}" for j, i in ids.items()) + "，扭矩已关闭，可以用手掰\n")
     if not args.whole_finger:
         try:

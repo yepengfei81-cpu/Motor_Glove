@@ -30,6 +30,7 @@ def main():
     ap.add_argument("--print", action="store_true", help="不开窗口，只打印")
     ap.add_argument("--port", default=None)
     ap.add_argument("--glove", default="A")
+    ap.add_argument("--model", choices=list(gm.MODELS), default="glove", help="仿真里显示哪个模型：glove / hand")
     ap.add_argument("--id-check", action="store_true", help="不用标定：启动时的姿态当零位、方向都取 +1，只看是哪个关节在动")
     args = ap.parse_args()
     fingers = args.fingers or list(gm.FINGERS)
@@ -66,8 +67,8 @@ def main():
             print(f"* 这些手指还没标定，暂时不同步（在仿真里保持零位）: {', '.join(todo)}。"
                   f"标定命令: " + "；".join(f"python tools/calibrate.py {f} --glove {args.glove}" for f in todo))
 
-    axes = gm.joint_axes()
-    m = mujoco.MjModel.from_xml_path(gm.SCENE)
+    axes = gm.joint_axes(gm.scene_of(args.model))
+    m = mujoco.MjModel.from_xml_path(gm.scene_of(args.model))
     d = mujoco.MjData(m)
     act = {mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_ACTUATOR, i): i for i in range(m.nu)}
     viewer = None if args.print else mujoco.viewer.launch_passive(m, d)

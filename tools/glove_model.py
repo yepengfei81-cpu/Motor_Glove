@@ -11,6 +11,15 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 MJCF = os.path.join(ROOT, "glove_mujoco", "robot.xml")
 SCENE = os.path.join(ROOT, "glove_mujoco", "teleop_scene.xml")
 DIRECTIONS_FILE = os.path.join(ROOT, "glove_mujoco", "joint_directions.json")
+# 两种"手"：手套（带连杆，闭链）和直驱机械手。两者的 Onshape 装配体用同一套坐标，关节名相同
+MODELS = {
+    "glove": os.path.join(ROOT, "glove_mujoco", "teleop_scene.xml"),
+    "hand": os.path.join(ROOT, "hand_mujoco", "scene.xml"),
+}
+
+
+def scene_of(model="glove"):
+    return MODELS[model]
 
 # 每根手指的电机关节，按机构上从基座往外的顺序（和 URDF 的树一致）：
 # 四指是 MCP 弯曲（装在基座上）-> MCP 侧摆 -> PIP；拇指是 CMC 侧摆 -> CMC 弯曲 -> MCP 弯曲 -> IP
@@ -28,6 +37,15 @@ DORSAL_REF_BASE = np.array([0.181, -0.983, -0.001])
 
 # 每根手指远端那节（用来看指尖往哪走）
 TIP_JOINT = {"thumb": "thumb_ip", "index": "index_pip", "mid": "mid_pip", "ring": "ring_pip"}
+
+
+def tip_body(m, finger):
+    """这根手指远节所在的 body：手套有被动的 PIP/IP 关节就用它，直驱机械手用最后一个电机关节"""
+    import mujoco
+    j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, TIP_JOINT[finger])
+    if j < 0:
+        j = mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, FINGERS[finger][-1])
+    return int(m.jnt_bodyid[j])
 
 
 def finger_of(joint):
@@ -87,7 +105,7 @@ def compute_directions(path=SCENE, step=0.3):
     m.opt.disableflags = int(m.opt.disableflags) | int(mujoco.mjtDisableBit.mjDSBL_CONTACT)
     acts = [mujoco.mj_id2name(m, mujoco.mjtObj.mjOBJ_ACTUATOR, i) for i in range(m.nu)]
     jid = lambda n: mujoco.mj_name2id(m, mujoco.mjtObj.mjOBJ_JOINT, n)
-    tipb = {f: m.jnt_bodyid[jid(j)] for f, j in TIP_JOINT.items()}
+    tipb = {f: tip_body(m, f) for f in FINGERS}
 
     def settle(ctrl):
         mujoco.mj_resetData(m, d)
@@ -121,11 +139,13 @@ def compute_directions(path=SCENE, step=0.3):
 
 
 def directions(path=SCENE, refresh=False):
-    """读缓存的方向表；模型更新过（robot.xml 比缓存新）就重算"""
-    if not refresh and os.path.exists(DIRECTIONS_FILE) and os.path.getmtime(DIRECTIONS_FILE) > os.path.getmtime(MJCF):
-        return json.load(open(DIRECTIONS_FILE))
+    """读缓存的方向表（和模型放在同一个目录）；模型更新过（robot.xml 比缓存新）就重算"""
+    folder = os.path.dirname(os.path.abspath(path))
+    cache, mjcf = os.path.join(folder, "joint_directions.json"), os.path.join(folder, "robot.xml")
+    if not refresh and os.path.exists(cache) and os.path.getmtime(cache) > os.path.getmtime(mjcf):
+        return json.load(open(cache))
     out = compute_directions(path)
-    json.dump(out, open(DIRECTIONS_FILE, "w"), indent=1)
+    json.dump(out, open(cache, "w"), indent=1)
     return out
 
 
