@@ -42,15 +42,17 @@ class Demo:
     """后台线程：仿真窗口里让当前关节在零位和"握拳/向拇指侧"方向之间来回动，演示要你转的方向"""
 
     def __init__(self, finger, use_viewer, scene=gm.SCENE):
-        self.m = mujoco.MjModel.from_xml_path(scene)
+        import sim_scenes
+        model = "hand" if os.path.dirname(os.path.abspath(scene)).endswith("hand_mujoco") else "glove"
+        self.m, cam = sim_scenes.view_scene(model)           # 手掌立起来朝前，没有地面方块，关掉接触
         self.d = mujoco.MjData(self.m)
-        self.m.opt.disableflags = int(self.m.opt.disableflags) | int(mujoco.mjtDisableBit.mjDSBL_CONTACT)
         self.act = {mujoco.mj_id2name(self.m, mujoco.mjtObj.mjOBJ_ACTUATOR, i): i for i in range(self.m.nu)}
         self.tip_body = gm.tip_body(self.m, finger)
         self.joint, self.direction, self.running, self.t_start = None, 1, True, time.time()
         self.viewer = mujoco.viewer.launch_passive(self.m, self.d) if use_viewer else None
         if self.viewer is not None:
             mujoco.mj_forward(self.m, self.d)
+            sim_scenes.apply_cam(self.viewer, cam)
             self.viewer.cam.lookat[:] = self.d.xpos[self.tip_body]
             self.viewer.cam.distance = 0.35
             self.thread = threading.Thread(target=self._run, daemon=True)
@@ -90,13 +92,16 @@ def ask_sign(j, k, n, bus, i, zero_i, demo, direction):
     demo.show(j, direction)
     span = "10~20°" if "_abd_" in j else "20~40°"
     note = "（拇指以仿真窗口里的演示为准）" if j.startswith("thumb") else "（仿真窗口里在演示）"
+    flipped = False
     while True:
-        ans = input(f"  [{k}/{n} · 2/3] 往 {gm.physical_positive(j)} 转 {span}{note}，扶住，按回车"
+        what = "照仿真窗口里【反向后】的演示方向" if flipped else f"往 {gm.physical_positive(j)}"
+        ans = input(f"  [{k}/{n} · 2/3] {what} 转 {span}{'' if flipped else note}，扶住，按回车"
                     f"\n        （演示方向不对或者真手套转不过去：输入 r 回车，演示反过来）... ").strip().lower()
         if ans == "r":
             direction = -direction
+            flipped = not flipped
             demo.show(j, direction)
-            print("        演示已反向，照窗口里的新方向转")
+            print("        演示已反向：照窗口里的新方向转（不管它看起来是弯曲还是伸直）")
             continue
         now, _ = bus.read_avg(10)
         d = wrap_ticks(round(now[i] - zero_i))

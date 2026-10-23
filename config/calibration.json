@@ -2,7 +2,7 @@
  "joints": {
   "ring_mcp_flex_motor": {
    "id": 11,
-   "zero_raw": 2033,
+   "zero_raw": 2054.617777777778,
    "sign": -1,
    "axis_base": [
     0.777115820865078,
@@ -13,7 +13,7 @@
   "ring_mcp_abd_motor": {
    "id": 12,
    "zero_raw": 1838,
-   "sign": 1,
+   "sign": -1,
    "axis_base": [
     0.5735765525110844,
     -0.819151962952685,
@@ -22,7 +22,7 @@
   },
   "ring_pip_motor": {
    "id": 13,
-   "zero_raw": 3778,
+   "zero_raw": 3803.031111111111,
    "sign": -1,
    "axis_base": [
     -0.7771158208650774,
@@ -32,7 +32,7 @@
   },
   "index_mcp_flex_motor": {
    "id": 5,
-   "zero_raw": 11,
+   "zero_raw": 4083.1066666666666,
    "sign": -1,
    "axis_base": [
     -0.9999999999999992,
@@ -62,7 +62,7 @@
   },
   "mid_mcp_motor": {
    "id": 8,
-   "zero_raw": 2146,
+   "zero_raw": 2191.511111111111,
    "sign": -1,
    "axis_base": [
     0.9961946653154903,
@@ -72,7 +72,7 @@
   },
   "mid_mcp_abd_motor": {
    "id": 9,
-   "zero_raw": 2056,
+   "zero_raw": 2042.3466666666666,
    "sign": -1,
    "axis_base": [
     0.08715611737960546,
@@ -82,7 +82,7 @@
   },
   "mid_pip_motor": {
    "id": 10,
-   "zero_raw": 543,
+   "zero_raw": 558.9288888888889,
    "sign": -1,
    "axis_base": [
     -0.99619466531549,
@@ -92,7 +92,7 @@
   },
   "thumb_cmc_abd_motor": {
    "id": 1,
-   "zero_raw": 808,
+   "zero_raw": 792.0711111111111,
    "sign": -1,
    "axis_base": [
     -0.5438157704940861,
@@ -103,7 +103,7 @@
   "thumb_ip_motor": {
    "id": 4,
    "zero_raw": 2792,
-   "sign": 1,
+   "sign": -1,
    "axis_base": [
     -0.40483835648597294,
     -0.8464277505472948,
@@ -112,7 +112,7 @@
   },
   "thumb_cmc_flex_motor": {
    "id": 2,
-   "zero_raw": 3058,
+   "zero_raw": 3061.4133333333334,
    "sign": -1,
    "axis_base": [
     -0.5693018009868066,
@@ -131,5 +131,5 @@
    ]
   }
  },
- "updated": "2026-10-16 22:34:38"
+ "updated": "2026-10-20 06:16:46"
 }

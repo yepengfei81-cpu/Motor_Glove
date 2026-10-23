@@ -1,5 +1,27 @@
 {
- "A": {"port": "/dev/ttyACM0", "model": "glove", "desc": "手套 A（戴在手上的主手，OpenRB）"},
- "B": {"port": "/dev/ttyUSB0", "model": "glove", "desc": "手套 B（U2D2）"},
- "H": {"port": "/dev/ttyUSB0", "model": "hand", "desc": "直驱机械手（U2D2）"}
+ "A": {
+  "port": "/dev/openrb",
+  "model": "glove",
+  "desc": "手套 A（戴在手上的主手，OpenRB）"
+ },
+ "B": {
+  "port": "/dev/u2d2",
+  "model": "glove",
+  "desc": "手套 B（U2D2）"
+ },
+ "H": {
+  "port": "/dev/u2d2",
+  "model": "hand",
+  "desc": "直驱机械手（U2D2）"
+ },
+ "T1": {
+  "port": "/dev/openrb",
+  "model": "glove",
+  "desc": "台架电机 T1（thumb_cmc_abd_motor，/dev/ttyACM2）"
+ },
+ "T2": {
+  "port": "/dev/u2d2",
+  "model": "glove",
+  "desc": "台架电机 T2（thumb_cmc_abd_motor，/dev/ttyUSB0）"
+ }
 }

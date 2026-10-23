@@ -1,7 +1,7 @@
 """
 运行时构建 MuJoCo 场景（不改动磁盘上的模型文件）：
 
-  view_scene()   手掌立起来、朝前（手指朝上），没有方块、关掉接触，随便动
+  view_scene(model, cam=...)   手掌立起来、朝前（手指朝上），没有方块没有地面、关掉接触，随便动；glove / hand 都行
   grasp_scene()  手掌朝下，手可以整体上下移动（mocap），方块是能被抓起来的自由物体，
                  方块放在"你捏东西时拇指和食指之间"的位置
 
@@ -22,23 +22,47 @@ ROOT_BODY = "part_1"
 CONTACT = int(mujoco.mjtDisableBit.mjDSBL_CONTACT)
 
 
-def _spec():
-    return mujoco.MjSpec.from_file(gm.SCENE)
+def _spec(model="glove"):
+    return mujoco.MjSpec.from_file(gm.scene_of(model))
 
 
-def view_scene(height=0.05):
-    """手掌立起来朝前；返回 (model, 相机参数)"""
+CAMS = {   # 手背朝 +X、手指朝 +Z 时的几个视角
+    "back": {"azimuth": 180.0, "elevation": -10.0},    # 从 +X 往回看：举起手、手心朝前时你自己看到的样子（看到手背）
+    "palm": {"azimuth": 0.0, "elevation": -10.0},      # 对面的人看到的样子（看到手心）
+    "side": {"azimuth": 90.0, "elevation": -10.0},     # 从拇指一侧看：手心/手背方向的间隙在这个视角里才看得出来
+    "top": {"azimuth": 180.0, "elevation": -80.0},     # 从指尖方向俯视
+}
+
+
+def view_scene(model="glove", height=0.05, cam="back"):
+    """
+    手掌立起来朝前（手指朝上、手背朝 +X），删掉方块和地面，关掉所有接触：手指怎么动都不会碰到东西。
+    返回 (model, 相机参数)。model: "glove" / "hand"。
+    """
     import place_root
-    spec = _spec()
-    spec.delete(spec.body("cube"))
-    pose = place_root.auto_pose(gm.MJCF, "palm_front", height)
+    spec = _spec(model)
+    for name in ("cube",):
+        try:
+            spec.delete(spec.body(name))
+        except Exception:        # noqa: BLE001 —— 这个场景里没有方块
+            pass
+    for g in list(spec.worldbody.geoms):
+        if g.name == "floor":
+            spec.delete(g)
+    mjcf = os.path.join(os.path.dirname(gm.scene_of(model)), "robot.xml")
+    pose = place_root.auto_pose(mjcf, "palm_front", height)
     root = spec.body(ROOT_BODY)
     root.pos, root.quat = pose["pos"], pose["quat_wxyz"]
     m = spec.compile()
     m.opt.disableflags = int(m.opt.disableflags) | CONTACT
-    # 手背朝 +X；相机放在 +X 一侧往回看，看到的就是"举起手、手心朝前"时你自己看到的样子
-    cam = {"azimuth": 180.0, "elevation": -10.0, "distance": 0.45, "lookat": [0.0, 0.0, height + 0.12]}
-    return m, cam
+    c = dict(CAMS.get(cam, CAMS["back"]))
+    c.update({"distance": 0.45, "lookat": [0.0, 0.0, height + 0.12]})
+    return m, c
+
+
+def apply_cam(viewer, cam):
+    viewer.cam.azimuth, viewer.cam.elevation, viewer.cam.distance = cam["azimuth"], cam["elevation"], cam["distance"]
+    viewer.cam.lookat[:] = cam["lookat"]
 
 
 def _tip_low(m, d, finger):

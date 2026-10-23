@@ -1,0 +1,6 @@
+# 固定设备名，不随 USB 枚举顺序变：
+#   /dev/openrb  = OpenRB-150（手套 A 的控制板）
+#   /dev/u2d2    = U2D2（FTDI FT232H）
+# 安装：sudo cp tools/99-dxl-names.rules /etc/udev/rules.d/ && sudo udevadm control --reload-rules && sudo udevadm trigger
+SUBSYSTEM=="tty", ATTRS{idVendor}=="2f5d", ATTRS{idProduct}=="2202", SYMLINK+="openrb", MODE="0666"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6014", SYMLINK+="u2d2", MODE="0666"

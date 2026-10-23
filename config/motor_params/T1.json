@@ -1,0 +1,58 @@
+{
+ "device": "T1",
+ "joint": "thumb_cmc_abd_motor",
+ "fitted": "2026-10-23 04:54:38",
+ "kt_hold": 0.1497218840153874,
+ "kt_hold_sign": 1.0,
+ "hold_offset_deg": -14.999999999999998,
+ "tc_from_hold": 0.00541369378952305,
+ "sweeps": [
+  {
+   "mass": 0.122,
+   "radial_N": 1.19682,
+   "kt_drive_net": 0.16902354949569826,
+   "backdrive_friction_fraction": 0.8876734750474201,
+   "friction_mNm": 12.174039565225884
+  },
+  {
+   "mass": 0.16415,
+   "radial_N": 1.6103115,
+   "kt_drive_net": 0.16189589256335607,
+   "backdrive_friction_fraction": 0.8965647813146882,
+   "friction_mNm": 16.54414003771843
+  },
+  {
+   "mass": 0.05273,
+   "radial_N": 0.5172813,
+   "kt_drive_net": 0.20855492020522423,
+   "backdrive_friction_fraction": 0.7685256887022548,
+   "friction_mNm": 4.555518299839843
+  }
+ ],
+ "kt_drive_net": 0.17982478742142619,
+ "kt_used": 0.146,
+ "ts_pos": 0.0026150089579624544,
+ "ts_neg": 0.002527468016419407,
+ "b_over_J": 1.304038255061127,
+ "tc_over_J": 109.92465861970231,
+ "J_chirp": 2.6323276028956872e-05,
+ "b_chirp": 0.0003634237744976316,
+ "tc_chirp": 0.0029901226920082684,
+ "chirp_resid_mNm": 3.412204713507338,
+ "current_lag_ms": 7.999991998076439,
+ "coast_b_over_J": 2.651121759855095,
+ "coast_tc_over_J": 74.22909874546383,
+ "J_used": 2.6323276028956872e-05,
+ "b_spin": 3.432655894029331e-05,
+ "tc_backdrive": 0.0028935771312352775,
+ "velocity_lag_ms": 21.999977994710207,
+ "pwm": {
+  "G_Nm_per_V": 0.044,
+  "Ke_V_s_per_rad": 0.12,
+  "R_sensor_ohm": 4.1,
+  "b_em_Nms_per_rad": 0.0018,
+  "stall_torque_100pct_mNm": 270,
+  "pct_per_100mA_equiv": 6.7,
+  "note": "2026-10-23 修正：bench_pwm 里 88% 占空比 × 6.9 V 堵转实测 1475 mA → R_sensor 4.1 Ω；G = Kt_sensor 0.18 / R = 0.044；Ke 由 pwm step 稳态 6.5 rad/s @0.915 V 扣摩擦压降 R·35 mA 得 0.12；之前 a0 法的 G 0.019 低估一倍（15 ms 窗内反电动势已把力矩压下去）。归零刹车 b_em 1.3–1.8 比 Kt·Ke/R=5.3 小 3 倍：驱动桥 PWM 关断期大概是断开（fast decay），电磁阻尼随占空比变，不是常数"
+ }
+}

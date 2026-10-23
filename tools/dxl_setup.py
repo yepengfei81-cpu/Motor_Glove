@@ -209,6 +209,29 @@ def cmd_show(args):
         print("  已登记但没应答:", ", ".join(missing))
     port.closePort()
 
+    # 其他波特率：出厂状态（ID 1 @ 57600）或者波特率被改过的电机，1 Mbps 下是看不到的
+    print(f"\n其他波特率（{', '.join(str(b) for b in BAUDS if b != TARGET_BAUD)}）:")
+    others = []
+    for baud in BAUDS:
+        if baud == TARGET_BAUD:
+            continue
+        p = open_port(baud)
+        res = PKT.broadcastPing(p)[0]
+        for i, v in sorted(res.items()):
+            others.append((baud, i))
+            tag = "出厂设置" if (baud, i) == (57600, 1) else "波特率 / ID 没设好"
+            print(f"  {baud:>8} bps  ID {i:3d}  {MODELS.get(v[0], 'model ' + str(v[0])):11s} {health(p, i)}  <- {tag}")
+        p.closePort()
+    if not others:
+        print("  无")
+    print()
+    if others:
+        print(f"* 这些电机要先设 ID：链上一次只留一个没设好的，运行  python tools/mg.py {GLOVE} set <关节名>")
+        print("  （出厂电机全是 ID 1，同时接了几个就会互相撞包：可能只看到一个，甚至一个都看不到）")
+    elif missing:
+        print("* 所有波特率下都没找到缺的那些电机：检查那一段的线有没有插好、电源有没有到。"
+              "如果接了好几个出厂电机，它们都是 ID 1 会互相撞包，拆成一次只接一个再扫")
+
 
 def cmd_status(args):
     reg = {name: int(i) for i, name in load_reg().items()}
@@ -384,12 +407,17 @@ def cmd_reboot(args):
 
 
 def cmd_blink(args):
-    port = open_port(TARGET_BAUD)
-    _, res, _ = PKT.ping(port, args.id)
-    if res != COMM_SUCCESS:
-        sys.exit(f"ID {args.id} 没应答")
-    blink(port, args.id, 5)
-    port.closePort()
+    """让某个 ID 的电机闪灯；先在 1 Mbps 找，找不到就在其他波特率找（出厂 / 临时 ID 的电机）"""
+    for baud in [TARGET_BAUD] + [b for b in BAUDS if b != TARGET_BAUD]:
+        port = open_port(baud)
+        _, res, _ = PKT.ping(port, args.id)
+        if res == COMM_SUCCESS:
+            print(f"* ID {args.id} @ {baud} bps：闪 5 下，看是哪个关节的电机")
+            blink(port, args.id, 5)
+            port.closePort()
+            return
+        port.closePort()
+    sys.exit(f"所有波特率下都没有 ID {args.id}")
 
 
 if __name__ == "__main__":
