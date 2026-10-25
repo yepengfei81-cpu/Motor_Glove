@@ -25,3 +25,10 @@ tools/deck/node_modules/
 .vscode/
 .idea/
 .DS_Store
+
+# 大日志不进仓库（> 5 MB：整场遥操作录像、长时间空载记录）
+airbot_logs/
+data/teleop_*.csv
+data/model_on.csv
+data/demo_new.csv
+data/**/*.png

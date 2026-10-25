@@ -196,7 +196,7 @@ def analyze_pwm_step(arr, seq, duty_pct, V, J, kt):
     edges = []; acc = 0.0
     for (d, _), (_, val_next) in zip(seq[:-1], seq[1:]):           # 每段结束的时刻和下一段的占空比
         acc += d; edges.append((acc, val_next))
-    print(f"    {'阶跃':>6s} {'延迟ms':>7s} {'稳态rad/s':>9s} {'Ke V·s/rad':>10s} {'τ上升ms':>7s} {'R(由τ)Ω':>8s} {'实测电流起点ms':>12s}")
+    print(f"    {'阶跃':>6s} {'延迟ms':>7s} {'稳态rad/s':>9s} {'Ke V·s/rad':>10s} {'τ上升ms':>7s} {'R(由τ)Ω':>8s} {'稳态电流mA':>9s} {'R(堵转)Ω':>8s} {'实测电流起点ms':>12s}")
     for (te, newv) in edges:
         k = int(np.searchsorted(t, te)); prev = arr[max(0, k - 2), 1]
         di = newv - prev
@@ -229,9 +229,11 @@ def analyze_pwm_step(arr, seq, duty_pct, V, J, kt):
         r_tau = tau_r * kt ** 2 / J if tau_r == tau_r else float("nan")
         im_idx = np.where(sgn * (im[k:k + 60] - im[k - 1]) > 0.3 * abs(di) / 100 * V / 3.3 * 1000)[0]
         t_im = (t[k + im_idx[0]] - t[k]) * 1e3 if len(im_idx) else float("nan")
-        print(f"    {prev:+3.0f}→{newv:+3.0f}% {delay * 1e3:7.1f} {v_ss:9.2f} {ke:10.3f} {tau_r * 1e3:7.1f} {r_tau:8.2f} {t_im:12.1f}")
-    print("    （合成数据验证：延迟列偏大约 1.5 ms，Ke 偏大约 10%（摩擦吃掉一点转速）；R = τ·Kt²/J，XL330-M077 堵转 1.5 A@5 V 对应 ≈3.3 Ω；"
-          "延迟若 ≤4 ms，电压模式就能把 K 开到 1–2 N·m/rad 还不振）")
+        i_ss = float(np.mean(im[k2 - int(0.12 * fs):k2])) if k2 > k else float("nan")
+        r_stall = abs(newv) / 100 * V / abs(i_ss) * 1000 if abs(v_ss) < 0.3 and abs(i_ss) > 5 and abs(newv) > 0 else float("nan")
+        print(f"    {prev:+3.0f}→{newv:+3.0f}% {delay * 1e3:7.1f} {v_ss:9.2f} {ke:10.3f} {tau_r * 1e3:7.1f} {r_tau:8.2f} {i_ss:9.0f} {r_stall:8.2f} {t_im:12.1f}")
+    print("    （延迟列偏大约 1.5 ms（合成数据验证）；Ke 偏大约 10%（摩擦吃掉一点转速）；R(由τ) = τ·Kt²/J 不可靠，以『杆挡住』那次的 R(堵转) = 占空比·V/稳态电流 为准；"
+          "自由转时稳态电流就是摩擦电流）")
 
 
 # ---------------- 实验 ----------------
@@ -242,7 +244,7 @@ def exp_spin(m, args):
     tag = "coast" if args.coast else "spin"
     if m.mode == "pwm":
         # 电压模式：脉冲用占空比，脉冲后占空比 0（绕组被短路式驱动）→ 看是几毫秒刹住还是滑行几百毫秒
-        mp = model_params(args.device); J = args.J or mp.get("J_used", 2.6e-5) * 0.18 / 0.146
+        mp = model_params(args.device); J = args.J or mp.get("J_used", 2.6e-5) * (mp.get("kt_em_estimate") or mp.get("kt_drive_net") or mp.get("kt_used", 0.146)) / mp.get("kt_used", 0.146)
         for k, sgn in enumerate([1, -1, 1, -1, 1, -1]):
             pulse = sgn * args.pulse_pct
             print(f"  脉冲 {k + 1}/6：占空比 {pulse:+.0f}% × {args.pulse_s:.2f} s，然后占空比 0 看 {args.decay_s:.1f} s")
@@ -343,13 +345,13 @@ def exp_step(m, args):
         return 0
     if m.mode == "pwm":
         vt = m.bus.fast_voltage_temp(); V = vt[m.id][0] if vt else 6.0
-        mp = model_params(args.device); J = args.J or mp.get("J_used", 2.6e-5) * 0.18 / 0.146
+        mp = model_params(args.device); J = args.J or mp.get("J_used", 2.6e-5) * (mp.get("kt_em_estimate") or mp.get("kt_drive_net") or mp.get("kt_used", 0.146)) / mp.get("kt_used", 0.146)
         kt = args.kt or mp.get("kt_em_estimate") or mp.get("kt_drive_net") or 0.18
         print(f"  占空比阶跃 ±{A:.0f}%（{V:.1f} V → ±{A / 100 * V:.2f} V，空载约 ±{A / 100 * V / kt:.1f} rad/s），J {J * 1e5:.2f}e-5，Kt {kt:.3f}")
-        arr = log_run(m, f"{args.device}_pwmstep", sum(d for d, _ in seq), cmd, extra={"exp": "pwmstep", "amp_pct": A, "V": V})
+        arr = log_run(m, f"{args.device}_pwmstep{('_' + args.tag) if args.tag else ''}", sum(d for d, _ in seq), cmd, extra={"exp": "pwmstep", "amp_pct": A, "V": V, "tag": args.tag})
         analyze_pwm_step(arr, seq, A, V, J, kt)
         return
-    log_run(m, f"{args.device}_step", sum(d for d, _ in seq), cmd, extra={"exp": "step", "amp_ma": A})
+    log_run(m, f"{args.device}_step{('_' + args.tag) if args.tag else ''}", sum(d for d, _ in seq), cmd, extra={"exp": "step", "amp_ma": A})
 
 
 def exp_hold(m, args):
@@ -696,6 +698,9 @@ def fit(args):
             print(f"lift：Kt = {np.mean(kts):.4f} ± {np.std(kts):.4f} N·m/A（{len(kts)} 个点）")
             if kt is None:
                 kt = float(np.mean(kts))
+    if kt is None and out.get("kt_drive_net"):
+        kt = float(out["kt_drive_net"])
+        print(f"没有 hold 实验也没给 --kt，用 sweep 抬升段的净 Kt {kt:.3f} N·m/A（传感器单位）换算下面的力矩和惯量")
     if kt is None:
         m_model = None
         try:
@@ -815,6 +820,7 @@ def main():
     ap.add_argument("--pwm-limit", type=float, default=40, help="pwm 模式的 PWM 上限 %%（默认 40：6 V 堵转约 0.7 A）")
     ap.add_argument("--pulse-pct", type=float, default=20, help="pwm 模式 spin 的脉冲占空比 %%（默认 20：空载约 6.7 rad/s）")
     ap.add_argument("--amp-pct", type=float, default=15, help="pwm 模式 step 的阶跃占空比 %%（默认 15：空载约 5 rad/s）")
+    ap.add_argument("--tag", default="", help="加在输出文件名后面的后缀，比如 --tag blocked，同一个实验做两次不互相覆盖")
     ap.add_argument("--k", type=float, default=0.1, help="spring 的刚度 N·m/rad（默认 0.1：300 mA 上限对应 ±46° 线性区）")
     ap.add_argument("--comp", action="store_true", help="spring 时打开摩擦前馈")
     ap.add_argument("--comp-gain", type=float, default=0.7, help="摩擦前馈的比例（默认 0.7；1.0 容易在反向点抖）")

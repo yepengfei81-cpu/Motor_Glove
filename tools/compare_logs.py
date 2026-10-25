@@ -11,6 +11,13 @@
   接触：门控打开的时间占比、门控开关次数（每分钟）、接触段反馈力矩的高频噪声（mN·m）、主手电流指令噪声（mA）、
         接触段主手速度抖动（rad/s）、反馈力矩的频谱（哪一段频率在抖）
 图：每份日志一列（角度 / 位置差+门控 / 反馈力矩+电流 / 环周期），最后一行是接触段力矩频谱叠在一起。
+
+叠图模式（新旧两种方式、接近的动作，叠在一张图上）：
+  python tools/compare_logs.py data/demo_old.csv data/demo_new.csv --overlay
+  python tools/compare_logs.py old.csv new.csv --overlay --start 3.2,1.8 --span 20 --json data/overlay.json
+每份日志自动找"开始动"的时刻（也可以 --start 手动给），从那一刻起对齐，四个面板共用时间轴：
+主手角度（两次动作像不像）/ 主手−从手位置差（跟得紧不紧、抖不抖）/ 主手电流指令（反馈力）/ 主手速度（手上的抖动）。
+--json 把降采样后的曲线和指标存成 json，给网页画图用。
 """
 import argparse
 import csv
@@ -122,11 +129,126 @@ def spectrum(t, x, mask):
     return f, p
 
 
+def lowpass(x, t, fc):
+    """零相位一阶低通（来回各一遍）"""
+    dt = float(np.median(np.diff(t))); a = dt / (dt + 1 / (2 * np.pi * fc))
+    y = x.astype(float).copy()
+    for i in range(1, len(y)):
+        y[i] = y[i - 1] + a * (x[i] - y[i - 1])
+    z = y[::-1].copy(); yy = y[::-1]
+    for i in range(1, len(z)):
+        z[i] = z[i - 1] + a * (yy[i] - z[i - 1])
+    return z[::-1]
+
+
+def onset_time(t, d, v_thr=0.5):
+    """开始动的时刻：主手角度（解卷绕）10 Hz 低通后的速度第一次超过 v_thr rad/s"""
+    q = np.unwrap(d["qA"])
+    v = np.gradient(lowpass(q, t, 10.0), t)
+    idx = np.where(np.abs(v) > v_thr)[0]
+    return float(t[idx[0]]) if len(idx) else float(t[0])
+
+
+def contact_bands(t, gate):
+    on = gate > 0.5
+    if not on.any():
+        return []
+    edges = np.diff(np.r_[0, on.astype(int), 0])
+    starts = np.where(edges == 1)[0]; ends = np.where(edges == -1)[0] - 1
+    return [(float(t[a]), float(t[min(b, len(t) - 1)])) for a, b in zip(starts, ends)]
+
+
+def overlay(runs, args, plt):
+    """两份日志按"开始动"对齐，叠在一张四面板图上；--json 顺便导出降采样曲线"""
+    if len(runs) != 2:
+        sys.exit("--overlay 需要正好两份日志：旧的在前，新的在后")
+    starts = [float(x) for x in args.start.split(",")] if args.start else [onset_time(r[1], r[2]) for r in runs]
+    spans = [r[1][-1] - s0 for r, s0 in zip(runs, starts)]
+    span = min(args.span or 1e9, *spans)
+    pre = 0.5
+    zh = args.lang == "zh"
+    L = {"old": "旧" if zh else "original", "new": "新" if zh else "current", "leader": " 主手" if zh else " leader", "follower": " 从手" if zh else " follower",
+         "y0": "主手角度 °（相对开始动时）" if zh else "leader angle, ° (relative to first movement)",
+         "title": "新旧两种方式，接近的动作，按开始动的时刻对齐" if zh else "Original and current approaches, same motion, aligned at the first movement",
+         "y1": "主手 − 从手 °" if zh else "leader − follower, °", "bands": "底部色条 = 判断为接触的时间段" if zh else "bars at the bottom = detected contact",
+         "y2": "主手电流指令 mA（反馈力）" if zh else "leader current command, mA (feedback force)", "y3": "主手速度 rad/s" if zh else "leader speed, rad/s",
+         "x": "开始动之后的时间 s" if zh else "time after first movement, s",
+         "foot": "接触段电流指令抖动：旧 {a:.0f} mA → 新 {b:.0f} mA   自由跟踪 RMS：旧 {c:.1f}° → 新 {d:.1f}°   位置差 2 Hz 以上成分：旧 {e:.2f}° → 新 {f:.2f}°" if zh else
+                 "Force jitter in contact: original {a:.0f} mA → current {b:.0f} mA   Follower lag in free motion (RMS): {c:.1f}° → {d:.1f}°   Oscillation in leader−follower above 2 Hz: {e:.2f}° → {f:.2f}°"}
+    labels = ["%s (%s, %.0f Hz)" % (L["old"], runs[0][0], runs[0][3]["实际 Hz"]), "%s (%s, %.0f Hz)" % (L["new"], runs[1][0], runs[1][3]["实际 Hz"])]
+    colors = [SERIES[1], SERIES[0]]                       # 旧 = 橙，新 = 蓝，颜色跟着对象走
+    cut = []
+    for (name, t, d, st, free, contact), s0 in zip(runs, starts):
+        m = (t >= s0 - pre) & (t <= s0 + span)
+        q = np.unwrap(d["qA"]); qb = np.unwrap(d["qB"])
+        k0 = int(np.searchsorted(t, s0))
+        cut.append({"t": t[m] - s0, "qA": np.degrees(q[m] - q[k0]), "qB": np.degrees(qb[m] - q[k0]),
+                    "err": np.degrees(d["err"][m]), "iA": d["iA_cmd"][m], "vL": d["vL_obs"][m], "gate": d["gate"][m],
+                    "iB": d["iB_meas"][m], "name": name, "hz": st["实际 Hz"]})
+    # 指标：接触段相邻周期电流指令差的标准差（抖动）、自由段跟踪 RMS、接触占比
+    metrics = {}
+    for c, lab in zip(cut, ("old", "new")):
+        on = c["gate"] > 0.5; freem = (c["gate"] < 0.5) & (np.abs(c["vL"]) > 0.3)
+        metrics[lab] = {"name": c["name"], "hz": round(float(c["hz"])),
+                        "contact_cmd_jitter_mA": round(float(np.std(np.diff(c["iA"][on]))) if on.sum() > 10 else float("nan"), 1),
+                        "tracking_rms_deg": round(float(np.sqrt(np.mean(c["err"][freem] ** 2))) if freem.sum() > 10 else float("nan"), 2),
+                        "contact_pct": round(100 * float(on.mean()), 1),
+                        "vL_jitter_contact_rad_s": round(float(np.std(c["vL"][on])) if on.sum() > 10 else float("nan"), 2),
+                        "err_hf_std_deg": round(float(np.std(c["err"] - lowpass(c["err"], c["t"] + 1e3, 2.0))), 2)}
+    print("\n叠图对齐：旧从 %.2f s 起，新从 %.2f s 起，取 %.1f s" % (starts[0], starts[1], span))
+    for lab in ("old", "new"):
+        m = metrics[lab]
+        print(f"  {lab:3s} {m['name']:18s} {m['hz']:4d} Hz | 接触段电流指令抖动 {m['contact_cmd_jitter_mA']:6.1f} mA | 自由跟踪 RMS {m['tracking_rms_deg']:5.2f}° | "
+              f"位置差 2 Hz 以上成分 {m['err_hf_std_deg']:5.2f}° | 接触占比 {m['contact_pct']:4.1f}%")
+    fig, axes = plt.subplots(4, 1, figsize=(11, 11), sharex=True, gridspec_kw={"height_ratios": [1.1, 1, 1, 0.9]})
+    for ax in axes:
+        ax.set_facecolor("#fcfcfb"); ax.grid(True, color=GRID, lw=0.8); ax.tick_params(colors=INK2, labelsize=9)
+        for sp in ax.spines.values(): sp.set_color(GRID)
+    for c, lab, col in zip(cut, labels, colors):
+        axes[0].plot(c["t"], c["qA"], color=col, lw=1.4, label=lab + L["leader"])
+        axes[0].plot(c["t"], c["qB"], color=col, lw=0.8, ls="--", alpha=0.7, label=lab.split(" (")[0] + L["follower"])
+        axes[1].plot(c["t"], c["err"], color=col, lw=1.0, label=lab)
+        axes[2].plot(c["t"], c["iA"], color=col, lw=1.0, label=lab)
+        axes[3].plot(c["t"], c["vL"], color=col, lw=0.9, label=lab)
+    # 接触段：在位置差面板底部画两行色条
+    y0 = axes[1].get_ylim()[0]
+    for k, (c, col) in enumerate(zip(cut, colors)):
+        for a, b in contact_bands(c["t"], c["gate"]):
+            axes[1].plot([a, b], [y0 + (k + 0.5) * 0.04 * (axes[1].get_ylim()[1] - y0)] * 2, color=col, lw=4, solid_capstyle="butt", alpha=0.8)
+    axes[0].set_ylabel(L["y0"], color=INK2); axes[0].legend(frameon=False, fontsize=9, ncol=2)
+    axes[0].set_title(L["title"], color=INK, fontsize=12, loc="left")
+    axes[1].set_ylabel(L["y1"], color=INK2); axes[1].legend(frameon=False, fontsize=9)
+    axes[1].text(0.01, 0.02, L["bands"], transform=axes[1].transAxes, fontsize=8, color=INK2)
+    axes[2].set_ylabel(L["y2"], color=INK2); axes[2].legend(frameon=False, fontsize=9)
+    axes[3].set_ylabel(L["y3"], color=INK2); axes[3].set_xlabel(L["x"], color=INK2); axes[3].legend(frameon=False, fontsize=9)
+    mo, mn = metrics["old"], metrics["new"]
+    fig.text(0.01, 0.005, L["foot"].format(a=mo['contact_cmd_jitter_mA'], b=mn['contact_cmd_jitter_mA'], c=mo['tracking_rms_deg'], d=mn['tracking_rms_deg'],
+                                           e=mo['err_hf_std_deg'], f=mn['err_hf_std_deg']), fontsize=9, color=INK2)
+    fig.tight_layout(rect=(0, 0.02, 1, 1))
+    out = args.out or os.path.join(os.path.dirname(args.logs[0]) or ".", "overlay_" + "_vs_".join(r[0] for r in runs) + ".png")
+    fig.savefig(out, dpi=150, facecolor="#fcfcfb")
+    print(f"图已存 {out}")
+    if args.json:
+        import json
+        def ds(x, n=1500):
+            k = max(1, len(x) // n); return [round(float(v), 3) for v in x[::k]]
+        payload = {lab: {k: ds(c[k]) for k in ("t", "qA", "qB", "err", "iA", "vL", "gate")} | {"name": c["name"], "hz": round(float(c["hz"]))}
+                   for lab, c in zip(("old", "new"), cut)}
+        payload["metrics"] = metrics; payload["span_s"] = round(float(span), 2)
+        json.dump(payload, open(args.json, "w"), ensure_ascii=False)
+        print(f"曲线 json 已存 {args.json}")
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("logs", nargs="+")
     ap.add_argument("--joint", default=None)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--overlay", action="store_true", help="两份日志（旧, 新）按开始动的时刻对齐，叠在一张图上")
+    ap.add_argument("--start", default=None, help="--overlay 时手动给两份日志的起点秒数，如 3.2,1.8（默认自动找开始动的时刻）")
+    ap.add_argument("--span", type=float, default=None, help="--overlay 时从起点起取多少秒（默认到较短的那份结束）")
+    ap.add_argument("--json", default=None, help="--overlay 时把降采样曲线和指标存成 json（给网页用）")
+    ap.add_argument("--lang", choices=["en", "zh"], default="en", help="--overlay 图里的文字语言（默认 en）")
     args = ap.parse_args()
     import matplotlib
     matplotlib.use("Agg")
@@ -138,6 +260,9 @@ def main():
         t, d, joint = load(p, args.joint)
         stats, free, contact = analyze(t, d)
         runs.append((os.path.basename(p).replace(".csv", ""), t, d, stats, free, contact))
+    if args.overlay:
+        overlay(runs, args, plt)
+        return
     # ---- 表 ----
     keys = list(runs[0][3])
     w = max(len(k) for k in keys) + 2

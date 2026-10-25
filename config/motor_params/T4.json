@@ -1,0 +1,27 @@
+{
+ "device": "T4",
+ "joint": "index_mcp_flex_motor",
+ "fitted": "2026-10-25 06:16:53",
+ "sweeps": [
+  {
+   "mass": 0.164,
+   "radial_N": 1.60884,
+   "kt_drive_net": 0.7734631767739664,
+   "backdrive_friction_fraction": 0.7739519437589089,
+   "friction_mNm": 14.26853808557067
+  },
+  {
+   "mass": 0.328,
+   "radial_N": 3.21768,
+   "kt_drive_net": 1.000467842120941,
+   "backdrive_friction_fraction": 0.8381689892725779,
+   "friction_mNm": 30.90488044385737
+  }
+ ],
+ "kt_drive_net": 0.8869655094474537,
+ "kt_used": 0.8869655094474537,
+ "ts_pos": 0.015967043933315883,
+ "ts_neg": 0.015791330894962232,
+ "b_over_J": 0.5463688961436681,
+ "tc_over_J": 26.436478210872803
+}

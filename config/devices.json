@@ -23,5 +23,15 @@
   "port": "/dev/u2d2",
   "model": "glove",
   "desc": "台架电机 T2（thumb_cmc_abd_motor，/dev/ttyUSB0）"
+ },
+ "T3": {
+  "port": "/dev/openrb",
+  "model": "glove",
+  "desc": "台架电机 T3（index_mcp_flex_motor，/dev/ttyACM2）"
+ },
+ "T4": {
+  "port": "/dev/u2d2",
+  "model": "glove",
+  "desc": "台架电机 T4（index_mcp_flex_motor，/dev/ttyUSB0）"
  }
 }

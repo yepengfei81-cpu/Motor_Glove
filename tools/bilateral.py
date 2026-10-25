@@ -94,11 +94,13 @@ def main():
                     help="允许从手在主手前面时把主手往前拉（默认不允许：只在主手往从手被挡住的方向推时才出力，"
                          "避免从手关节卡住落在后面时把你的手指往前带）")
     ap.add_argument("--model", default=None, metavar="NAME",
-                    help="用 motor_id.py 辨识出来的参数（config/motor_params/NAME.json）：电磁 Kt、惯量、摩擦、负载摩擦。"
+                    help="用 motor_id.py 辨识出来的参数：NAME = config/motor_params/NAME.json 用于所有关节（台架 T1/T3）；"
+                         "auto = 按每个电机总线报的型号选 XL330-M288.json / XL330-M077.json（手套、机械手用这个）。"
                          "打开后：主手用观测速度加阻尼（--zeta）和摩擦前馈（--comp-gain），从手用模型法接触检测（--gate model），墙模式电流上限按推人/顶人分开")
     ap.add_argument("--gate", choices=["current", "model"], default=None,
                     help="接触检测：current = 从手电流过门限（旧）；model = 从手实测电流减去模型算的空载电流（需要 --model）。默认跟 --model 走")
     ap.add_argument("--r-load", type=float, default=0.025, help="负载摩擦换算用的力臂 m：手推杆的位置 / 四连杆在舵盘上的半径（默认 0.025）")
+    ap.add_argument("--r-load-map", action="append", default=[], metavar="NAME=M", help="按关节给力臂 m（舵盘半径），覆盖 --r-load；可重复")
     ap.add_argument("--comp-gain", type=float, default=0.5, help="空载库仑摩擦前馈比例（默认 0.5）")
     ap.add_argument("--v-dead", type=float, default=0.3, help="摩擦前馈的速度死区 rad/s（默认 0.3；慢动作也想补就 0.15，太小零速附近会抖）")
     ap.add_argument("--v-ramp", type=float, default=0.5, help="摩擦前馈从死区到全额的过渡宽度 rad/s（默认 0.5）")
@@ -116,7 +118,7 @@ def main():
     ap.add_argument("--pwm-limit", type=float, default=90, help="pwm 模式的 PWM 上限 %%（默认 90）")
     ap.add_argument("--pwm-g", type=float, default=None, help="pwm 模式：堵转力矩/电压 N·m/V = Kt/R（默认取 motor_params 的 pwm.G，没有则 0.044）")
     ap.add_argument("--pwm-ke", type=float, default=None, help="pwm 模式：反电动势常数 V·s/rad（默认取 motor_params 的 pwm.Ke，没有则 0.12）")
-    ap.add_argument("--pwm-cancel", type=float, default=0.5, help="pwm 模式：按 Ke·v̂ 前馈抵消电磁阻尼的比例 0–1（默认 0.5。Ke 估高了就是负阻尼、停不下来，所以只前馈一半，剩下交给电流环）")
+    ap.add_argument("--pwm-cancel", type=float, default=0.8, help="pwm 模式：按 Ke·v̂ 前馈抵消电磁阻尼的比例 0–1（默认 0.8；剩下交给电流环。估高了就是负阻尼、停不下来，M288 的电磁阻尼 21 mN·m·s/rad 不抵消就是空载最大的黏劲）")
     ap.add_argument("--pwm-iloop", type=float, default=5.0, help="pwm 模式：软件电流环带宽 Hz（默认 5）。用电机实测电流做积分修正，低频像电流模式一样轻，高频（接触、松手）保留电磁阻尼；0 关掉")
     ap.add_argument("--pwm-r", type=float, default=None, help="pwm 模式：电压/实测电流 的表观电阻 Ω（默认取 motor_params 的 pwm.R_sensor_ohm，没有则 4.1），定电流环增益和限流")
     ap.add_argument("--wall", action="store_true",
@@ -147,6 +149,22 @@ def main():
     ap.add_argument("--log", default=None, help="把每个周期的数据存成 CSV")
     ap.add_argument("--follower-kp", type=int, default=None, help="从手位置环 P 增益（电机默认 400；低 = 软，高 = 硬），会记进 CSV")
     ap.add_argument("--follower-kd", type=int, default=None, help="从手位置环 D 增益（默认 0）")
+    ap.add_argument("--follower-ki", type=int, default=None, help="从手位置环 I 增益（默认 0）。能顶过静摩擦消掉小误差，太大会在目标附近来回蹭")
+    ap.add_argument("--follower-mode", choices=["position", "current"], default="position",
+                    help="从手怎么驱动：position = 电机自己的位置环（默认）；current = 电流模式，我们自己做 PD + 模型前馈（惯量、粘滞、库仑摩擦都按辨识参数沿参考轨迹补），"
+                         "从手不再粘滑，接触力也能直接算出来（指令力矩 − 模型），需要 --model")
+    ap.add_argument("--follower-bw", type=float, default=6.0, help="--follower-mode current 时从手位置环带宽 Hz（默认 6）：K = J·(2πf)²，按每个电机的惯量自动算")
+    ap.add_argument("--follower-bw-map", action="append", default=[], metavar="KEY=HZ",
+                    help="按关节或型号给从手环带宽，覆盖 --follower-bw；KEY 是关节名前缀（index_pip）或型号（M077、M288）。例：--follower-bw-map M077=12")
+    ap.add_argument("--follower-zeta", type=float, default=0.8, help="--follower-mode current 时从手位置环阻尼比（默认 0.8）")
+    ap.add_argument("--follower-comp", type=float, default=0.9, help="--follower-mode current 时从手库仑摩擦前馈比例（默认 0.9），沿参考轨迹的速度方向")
+    ap.add_argument("--fb-force", type=float, default=0.0,
+                    help="不经门控的力反射增益（默认 0 = 关）：主手力矩 −= 增益 × 从手接触力估计。从手是 current 模式时用 指令力矩 − 模型 算，position 模式时用 实测电流 − 模型。"
+                         "软物体、纹理靠它才摸得到；位置差弹簧只能摸到硬挡")
+    ap.add_argument("--fb-force-lpf", type=float, default=6.0,
+                    help="力反射观测器的统一带宽 Hz（默认 6）。指令力矩、速度项、加速度项全部过同一个低通再相减，否则主手一加速，瞬时的指令力矩减去滞后的模型就是一个假的接触力，反射回去等于负惯量，两边一起抖")
+    ap.add_argument("--fb-force-th", type=float, default=5.0, help="力反射的死区 mN·m（默认 5），模型误差以内不反射")
+    ap.add_argument("--obs-hz", type=float, default=15.0, help="主手速度观测器低通 Hz（默认 15）。M288 惯量大、电磁阻尼大，可以开到 25，换向时前馈翻得更快")
     ap.add_argument("--gain", action="append", default=[], metavar="NAME=KP[,KD[,KI]]",
                     help="单独给某些关节设从手 P/D 增益，NAME 是关节名或前缀，例如 --gain thumb=600,60 --gain index_pip_motor=900")
     ap.add_argument("--cmd-lpf", type=float, default=0.0,
@@ -221,44 +239,104 @@ def main():
     jmap = JointMap(joints, scale=args.scale, map_path=args.map, to_hand=(args.follower_model == "hand"),
                     g2h_path=args.g2h, range_deg=args.follower_range)
     to_follower = jmap
-    MP = None
-    if args.model:
+    def kt_lead_guess(j):
+        return (MPJ[j]["kt"] if MPJ else KT[models[j]])
+
+    def load_mp(path):
         import json as _json
-        mp_path = os.path.join(gm.ROOT, "config", "motor_params", f"{args.model}.json")
-        MP_raw = _json.load(open(mp_path))
-        kt_em = MP_raw.get("kt_em_estimate") or MP_raw.get("kt_drive_net") or 0.146
-        J_true = MP_raw.get("J_chirp", 2.6e-6) * kt_em / 0.146            # chirp 的 J 按手册 Kt 拟的，换算
-        MP = {"kt": kt_em, "J": J_true,
-              "b": MP_raw.get("b_over_J", 1.3) * J_true, "tc": MP_raw.get("tc_over_J", 110) * J_true,
-              "k_load": MP_raw.get("load_friction_model", {}).get("friction_mNm_per_N_radial", 11.0) / 1000}
-        MP["pwm"] = MP_raw.get("pwm", {})
-        B_contact = 2 * args.zeta * math.sqrt(max(args.kp, 1e-3) * MP["J"])
-        print(f"* 电机模型 {os.path.relpath(mp_path)}：Kt_em {MP['kt']:.3f} N·m/A，J {MP['J'] * 1e6:.0f} g·cm²，b {MP['b'] * 1e3:.3f} mN·m·s/rad，"
-              f"tc {MP['tc'] * 1e3:.1f} mN·m，负载摩擦 {MP['k_load'] * 1e3:.1f} mN·m/N（力臂 {args.r_load * 1000:.0f} mm）")
-        print(f"* 主手接触阻尼 B = 2·{args.zeta}·√(kp·J) = {B_contact * 1e3:.2f} mN·m·s/rad；摩擦前馈 {args.comp_gain:.0%}；"
-              f"接触检测 {'模型法' if (args.gate or 'model') == 'model' else '电流门限'}")
+        raw = _json.load(open(path))
+        kt_em = raw.get("kt_em_estimate") or raw.get("kt_drive_net") or 0.146
+        J_true = raw.get("J_chirp", 2.6e-6) * kt_em / raw.get("kt_used", 0.146)   # chirp 的 J 是按 fit 当时用的 Kt 拟的，换算到这里用的 Kt
+        return {"kt": kt_em, "J": J_true, "b": raw.get("b_over_J", 1.3) * J_true, "tc": raw.get("tc_over_J", 110) * J_true,
+                "k_load": raw.get("load_friction_model", {}).get("friction_mNm_per_N_radial", 11.0) / 1000,
+                "pwm": raw.get("pwm", {}), "path": os.path.relpath(path)}
+    rmap = {}
+    for item in args.r_load_map:
+        n_, v_ = item.split("="); rmap[n_] = float(v_)
+    r_load = {j: rmap.get(j, args.r_load) for j in joints}
+    MP, MPJ, MPF = None, None, None                        # MP 只当"有没有模型"的开关用；参数按关节放在 MPJ[j]（主手）/ MPF[j]（从手）
+    fbw = {j: args.follower_bw for j in joints}            # 从手软件环带宽，按关节/型号可覆盖
+    for item in args.follower_bw_map:
+        key, v_ = item.split("="); v_ = float(v_)
+        for j in joints:
+            fm_name = MODEL_NAME.get(fmodels[j], "") if follower is not None else ""
+            if j.startswith(key) or (key and key in fm_name):
+                fbw[j] = v_
+    B_contact = {j: 0.0 for j in joints}
+    phi_eff = {j: 0.0 for j in joints}
+    if args.model:
+        mp_dir = os.path.join(gm.ROOT, "config", "motor_params")
+        cache, MPJ = {}, {}
+        for j in joints:
+            # --model auto：按总线报的型号选 config/motor_params/<型号>.json（XL330-M288 / XL330-M077）；否则所有关节用同一份
+            name = MODEL_NAME.get(models[j], str(models[j])) if args.model == "auto" else args.model
+            path = os.path.join(mp_dir, f"{name}.json")
+            if not os.path.exists(path):
+                sys.exit(f"没有 {os.path.relpath(path)}（--model auto 需要 config/motor_params/<型号>.json，比如 XL330-M288.json）")
+            MPJ[j] = cache.setdefault(path, load_mp(path))
+        MP = True
+        MPF = dict(MPJ)                                        # 从手接触检测用的模型：默认和主手同一份
+        if args.model == "auto" and follower is not None:
+            for j in joints:
+                name = MODEL_NAME.get(fmodels[j], str(fmodels[j]))
+                path = os.path.join(mp_dir, f"{name}.json")
+                if os.path.exists(path):
+                    MPF[j] = cache.setdefault(path, load_mp(path))
+        B_contact = {j: 2 * args.zeta * math.sqrt(max(args.kp, 1e-3) * MPJ[j]["J"]) for j in joints}
+        phi_eff = {j: min(0.5, MPJ[j]["k_load"] / r_load[j]) for j in joints}   # 负载摩擦 / 传递力矩，封顶 0.5
+        for path, m in cache.items():
+            js = [j for j in joints if MPJ[j] is m]
+            print(f"* 电机模型 {m['path']}（{len(js)} 个主手关节{'，从手同款' if all(MPF[j] is m for j in js) else '，从手另选'}）：Kt_em {m['kt']:.3f} N·m/A，J {m['J'] * 1e6:.0f} ×10⁻⁶ kg·m²，b {m['b'] * 1e3:.3f} mN·m·s/rad，"
+                  f"tc {m['tc'] * 1e3:.1f} mN·m，负载摩擦 {m['k_load'] * 1e3:.1f} mN·m/N；"
+                  f"接触阻尼 B = 2·{args.zeta}·√(kp·J) = {B_contact[js[0]] * 1e3:.1f} mN·m·s/rad；空载摩擦前馈 {m['tc'] * 1e3:.1f} mN·m × {args.comp_gain:.0%}")
+        rl = sorted(set(round(v, 4) for v in r_load.values()))
+        print(f"* 力臂 r_load {', '.join(f'{v * 1000:.0f}' for v in rl)} mm → 推人效率补偿 ×(1 + φ·drive)，φ = {', '.join(f'{v:.2f}' for v in sorted(set(round(x, 2) for x in phi_eff.values())))}；"
+              f"接触检测 {'模型法' if (args.gate or 'model') == 'model' else '电流门限'}；|v| < {args.v_dead} rad/s 不补摩擦")
     if args.mode == "pwm":
         if args.wall:
             sys.exit("--mode pwm 和 --wall 不能同时用")
-        pwm_g = args.pwm_g or (MP and MP["pwm"].get("G_Nm_per_V")) or 0.044
-        pwm_ke = args.pwm_ke or (MP and MP["pwm"].get("Ke_V_s_per_rad")) or 0.12
-        pwm_r = args.pwm_r or (MP and MP["pwm"].get("R_sensor_ohm")) or 4.1
-        pwm_ki = 2 * math.pi * args.pwm_iloop * pwm_r                                  # V/(A·s)：电流环交越 = Ki/R
+        pwm_g = {j: args.pwm_g or (MPJ and MPJ[j]["pwm"].get("G_Nm_per_V")) or 0.044 for j in joints}
+        pwm_ke = {j: args.pwm_ke or (MPJ and MPJ[j]["pwm"].get("Ke_V_s_per_rad")) or 0.12 for j in joints}
+        pwm_r = {j: args.pwm_r or (MPJ and MPJ[j]["pwm"].get("R_sensor_ohm")) or 4.1 for j in joints}
         pwm_ui = {j: 0.0 for j in joints}                                              # 电流环积分项（V），只允许表示反电动势
-        print(f"* 电压(PWM)模式：G {pwm_g * 1e3:.1f} mN·m/V，Ke {pwm_ke:.3f} V·s/rad，电磁阻尼 G·Ke = {pwm_g * pwm_ke * 1e3:.2f} mN·m·s/rad，"
-              f"空载前馈抵消 {args.pwm_cancel:.0%} + 电流环 {args.pwm_iloop:g} Hz（R 表观 {pwm_r:.0f} Ω），接触门控开了两者都停；"
-              f"PWM 上限 {args.pwm_limit:.0f}%；6 V 时 100 mA 当量 ≈ {0.1 * 0.17 / pwm_g / 6.0 * 100:.0f}% 占空比")
+        # 堵转 占空比→电流 查表（断续导通：低占空比下表观电阻 14 Ω，到 88% 才是 4.1 Ω）。按 6.4 V 测的，别的电压按比例缩放占空比
+        DEFAULT_MAP = {"duty_pct": [0, 3, 5, 7, 9, 11.5, 14.5, 18, 22.5, 27.5, 35, 45, 57, 88], "mA": [0, 18, 25, 32, 43, 56, 74, 104, 126, 199, 263, 396, 552, 1475], "V_bus": 6.4}
+        pwm_map = {}
+        for j in joints:
+            mp_ = (MPJ[j]["pwm"].get("stall_map") if MPJ else None) or DEFAULT_MAP
+            pwm_map[j] = (np.array(mp_["mA"], float) / 1000, np.array(mp_["duty_pct"], float) / 100, float(mp_.get("V_bus", 6.4)))
+
+        def duty_for_current(j, i_a, v_bus):
+            """堵转时要这么多电流（A，传感器单位）需要的占空比（0–1），超出表的部分按 R 线性外推"""
+            ia, dd, v0 = pwm_map[j]
+            a = abs(i_a)
+            if a <= ia[-1]:
+                d_ = float(np.interp(a, ia, dd))
+            else:
+                d_ = float(dd[-1] + (a - ia[-1]) * pwm_r[j] / v0)
+            return math.copysign(d_ * v0 / v_bus, i_a)
+
+        def r_eff(j, i_a, v_bus):
+            """工作点附近的表观电阻 V/A（电流环增益用）"""
+            a = max(abs(i_a), 0.01)
+            return abs(duty_for_current(j, a, v_bus)) * v_bus / a
+        seen = set()
+        for j in joints:
+            key = (pwm_g[j], pwm_ke[j], pwm_r[j])
+            if key in seen:
+                continue
+            seen.add(key)
+            print(f"* 电压(PWM)模式{'（' + MPJ[j]['path'] + '）' if MPJ else ''}：Kt {kt_lead_guess(j):.3f} N·m/A，Ke {pwm_ke[j]:.3f} V·s/rad，堵转 R {pwm_r[j]:.1f} Ω；"
+                  f"占空比按堵转查表：10 mA → {100 * duty_for_current(j, 0.01, 6.4):.1f}%，100 mA → {100 * duty_for_current(j, 0.1, 6.4):.0f}%，800 mA → {100 * duty_for_current(j, 0.8, 6.4):.0f}%")
+        print(f"* 空载反电动势前馈抵消 {args.pwm_cancel:.0%} + 电流环 {args.pwm_iloop:g} Hz（增益按工作点表观电阻），接触门控开了两者都停；PWM 上限 {args.pwm_limit:.0f}%，限流 {args.leader_limit:.0f} mA")
     if args.gate is None:
         args.gate = "model" if MP else "current"
     if args.gate == "model" and MP is None:
         sys.exit("--gate model 需要 --model")
-    kt_lead = {j: (MP["kt"] if MP else KT[models[j]]) for j in joints}
+    kt_lead = {j: (MPJ[j]["kt"] if MPJ else KT[models[j]]) for j in joints}
     obs = {j: {"qL": None, "vL": 0.0, "qB": None, "vB": 0.0, "vB_raw_prev": 0.0, "aB": 0.0, "iBf": 0.0, "e": None, "ed": 0.0} for j in joints}
     if args.coupling and MP is None:
         sys.exit("--coupling 需要 --model")
-    phi_eff = min(0.5, (MP["k_load"] / args.r_load) if MP else 0.0)   # 负载摩擦 / 传递力矩，封顶 0.5
-    if MP:
-        print(f"* 推人时的效率补偿：力矩 ×(1 + {phi_eff:.2f}·drive)，只在接触且电机在推人时生效；空载摩擦前馈 {MP['tc'] * 1e3:.1f} mN·m × {args.comp_gain:.0%}，|v| < {args.v_dead} rad/s 不补")
     i_free_log = {j: 0.0 for j in joints}
     wall_free_dir = {j: 0.0 for j in joints}
     wall_on = {j: False for j in joints}
@@ -307,13 +385,26 @@ def main():
           f"主手力矩上限 {args.max_torque} N·m，摩擦补偿 {args.friction_ma:.0f} mA，从手电流上限 {args.follower_limit} mA")
     if args.adaptive_kp:
         print(f"* 从手刚度随接触电流变化：P {args.adaptive_kp[0]} (空中) → {args.adaptive_kp[1]} (电流均值 ≥ {args.adapt_ref:.0f} mA)，时间常数 {args.adapt_tau} s")
+    elif args.follower_mode == "current" and MPF is not None:
+        for j in joints:
+            m_ = MPF[j]; K_s = m_["J"] * (2 * math.pi * fbw[j]) ** 2
+            print(f"* 从手 {j.replace('_motor', '')}：电流模式软件位置环，带宽 {fbw[j]:g} Hz → K {K_s:.2f} N·m/rad，B {2 * args.follower_zeta * math.sqrt(K_s * m_['J']) * 1e3:.1f} mN·m·s/rad，"
+                  f"前馈 J {m_['J'] * 1e6:.0f}e-6·a + b·v + {args.follower_comp:.0%}·{m_['tc'] * 1e3:.1f} mN·m·sgn(v)，上限 {args.follower_limit} mA")
+        if args.fb_force > 0:
+            print(f"* 力反射（不经门控）：主手 −= {args.fb_force} × (从手指令力矩 − 模型)，低通 {args.fb_force_lpf:g} Hz，死区 {args.fb_force_th:g} mN·m")
     else:
-        print(f"* 从手 P 增益固定 {kp0}")
+        print(f"* 从手 P 增益固定 {kp0}" + (f"；力反射 {args.fb_force} ×（实测电流 − 模型），低通 {args.fb_force_lpf:g} Hz" if args.fb_force > 0 else ""))
     try:
         if not args.dry_run:
-            if follower is not None:
+            if follower is not None and args.follower_mode == "current":
+                if MPF is None:
+                    sys.exit("--follower-mode current 需要 --model（从手的惯量和摩擦参数）")
+                if args.adaptive_kp or args.wall:
+                    sys.exit("--follower-mode current 不能和 --adaptive-kp / --wall 一起用")
+                follower.enter_current_mode(args.follower_limit)
+            elif follower is not None:
                 follower.enter_position_mode(args.follower_limit)
-                follower.set_position_gains(kp0, args.follower_kd)
+                follower.set_position_gains(kp0, args.follower_kd, args.follower_ki)
                 for g in args.gain:
                     name, _, val = g.partition("=")
                     parts = (val.split(",") + ["", "", ""])[:3]
@@ -367,6 +458,10 @@ def main():
         vA = leader.voltage()
         vB = follower.voltage() if follower is not None else float("nan")
         q_cmd = None                                   # 低通后的从手目标
+        ref = {j: {"q": None, "v": 0.0, "a": 0.0} for j in joints}     # 从手参考轨迹的速度/加速度（--follower-mode current 的前馈用）
+        fhat = {j: 0.0 for j in joints}                 # 从手接触力估计（从手空间，N·m），--fb-force 用
+        rfo = {j: {"tau": 0.0, "mdl": 0.0, "a": 0.0} for j in joints}   # 反作用力观测器里三个同带宽低通的状态
+        tauB_cmd = {j: 0.0 for j in joints}             # 从手指令力矩（current 模式）
         tau_f = {j: 0.0 for j in joints}
         gate = {j: 0.0 for j in joints}                # 连续门控 0–1：从手电流大且几乎不动 = 被挡住
         contact = {j: False for j in joints}
@@ -432,9 +527,33 @@ def main():
                         dt_c = (t_loop - t_prev) if t_prev else period
                         a_c = dt_c / (dt_c + 1 / (2 * math.pi * args.cmd_lpf))
                         q_cmd = dict(qA_cmd) if q_cmd is None else {j: q_cmd[j] + a_c * (qA_cmd[j] - q_cmd[j]) for j in joints}
-                        follower.write_positions(follower_goal_ticks(q_cmd))
+                        q_tgt = q_cmd
                     else:
-                        follower.write_positions(follower_goal_ticks(qA_cmd))
+                        q_tgt = qA_cmd
+                    if args.follower_mode == "current":
+                        # 从手自己的位置环 + 模型前馈：τ = K(q_ref−q) + B(v_ref−v̂) + J·a_ref + b·v_ref + c·tc·sgn(v_ref)
+                        # 刚度按每个电机的惯量定带宽：K = J·(2πf)²，B = 2ζ√(KJ)。摩擦沿参考速度方向补，从手不再一格一格跳
+                        dt_r = max((t_loop - t_prev) if t_prev else period, 1e-4)     # dt 在这段后面才算
+                        a_rv = dt_r / (dt_r + 1 / (2 * math.pi * args.obs_hz)); a_ra = dt_r / (dt_r + 1 / (2 * math.pi * 6))
+                        icmd = {}
+                        for j in joints:
+                            r = ref[j]; m_ = MPF[j]
+                            if r["q"] is not None and abs(q_tgt[j] - r["q"]) < 1.0:
+                                v_new = r["v"] + a_rv * ((q_tgt[j] - r["q"]) / dt_r - r["v"])
+                                r["a"] += a_ra * ((v_new - r["v"]) / dt_r - r["a"]); r["v"] = v_new
+                            r["q"] = q_tgt[j]
+                            K_s = m_["J"] * (2 * math.pi * fbw[j]) ** 2
+                            B_s = 2 * args.follower_zeta * math.sqrt(K_s * m_["J"])
+                            ramp_r = min(1.0, max(0.0, (abs(r["v"]) - 0.05) / 0.2)) * math.copysign(1.0, r["v"])
+                            tau = (K_s * (q_tgt[j] - qB[j]) + B_s * (r["v"] - obs[j]["vB"]) + m_["J"] * r["a"] + m_["b"] * r["v"]
+                                   + args.follower_comp * m_["tc"] * ramp_r)
+                            lim = args.follower_limit / 1000 * m_["kt"]
+                            tau = float(np.clip(tau * min(1.0, (t_loop - t0) / 1.5), -lim, lim))      # 前 1.5 s 软启动（ramp 在后面才算）
+                            tauB_cmd[j] = tau
+                            icmd[ids[j]] = sB[j] * tau / m_["kt"] * 1000
+                        follower.write_currents(icmd)
+                    else:
+                        follower.write_positions(follower_goal_ticks(q_tgt))
             elif args.lock:
                 if lock["on"] and lock["q"] is None:
                     lock["q"] = dict(qA)                    # 锁定那一刻的姿态就是"从手被挡住的位置"
@@ -467,7 +586,7 @@ def main():
             # 速度观测：位置差分 + 40 Hz 低通（电机报的速度滞后 22 ms，不能用来做阻尼）
             dt_o = max(dt, 1e-4)                                   # dt 在上面已经算好（t_prev 此时已更新，不能再减）
             # 编码器 1 tick = 0.088°，750 Hz 下差分一跳就是 1 rad/s，速度低通 15 Hz、加速度再低通 6 Hz 才压得住
-            a_v = dt_o / (dt_o + 1 / (2 * math.pi * 15))
+            a_v = dt_o / (dt_o + 1 / (2 * math.pi * args.obs_hz))
             a_a = dt_o / (dt_o + 1 / (2 * math.pi * 6))
             for j in joints:
                 o = obs[j]
@@ -511,7 +630,8 @@ def main():
                     # 模型法：从手空载时该有的电流（电机坐标）= (J·a + b·v + tc·tanh(v/v0)) / Kt；实测减去它就是接触力
                     o = obs[j]
                     v_m, a_m = sB[j] * o["vB"], sB[j] * o["aB"]
-                    i_free = (MP["J"] * a_m + MP["b"] * v_m + MP["tc"] * math.tanh(v_m / args.v0)) / MP["kt"] * 1000
+                    mj = MPF[j]                                                      # 从手电机自己的模型
+                    i_free = (mj["J"] * a_m + mj["b"] * v_m + mj["tc"] * math.tanh(v_m / args.v0)) / mj["kt"] * 1000
                     i_free_log[j] = i_free
                     resid = abs(o["iBf"] - i_free)
                     g_i = min(1.0, max(0.0, (resid - 0.5 * cma[j]) / (0.5 * cma[j])))
@@ -543,7 +663,7 @@ def main():
                     o["f_hat"] = o.get("f_hat", 0.0) + a_f * (f_raw - o.get("f_hat", 0.0))
                     f_hat = o["f_hat"] if abs(o["f_hat"]) > 0.003 else 0.0           # 3 mN·m 以下当噪声
                     f_hat = float(np.clip(f_hat, -args.max_torque, args.max_torque))
-                    t = (-args.kp * e_dead - B_contact * o["ed"] - args.kc * f_hat) * dirn[j]
+                    t = (-args.kp * e_dead - B_contact[j] * o["ed"] - args.kc * f_hat) * dirn[j]
                     contact[j] = abs(f_hat) > 0.01
                     gate[j] = 1.0 if contact[j] else 0.0                             # 只用于显示和日志
                 else:
@@ -554,13 +674,29 @@ def main():
                     th = 0.03
                     if abs(tauB) > th:
                         t -= args.kc * (abs(tauB) - th) * math.copysign(1, tauB) * gate[j] * dirn[j]
+                if args.fb_force > 0 and stB is not None and MPF is not None:
+                    # 从手接触力估计（反作用力观测器）：从手出的力矩 − 让它自己这么动需要的力矩。
+                    # 三项都过同一个低通（--fb-force-lpf）再相减：指令力矩是瞬时的，模型里的速度、加速度是滞后的，不配平滤波的话
+                    # 主手一加速，差值就是一个和加速度同相的假接触力，反射回去就是负惯量。摩擦项用和前馈同样的形状，免得前馈本身被当成接触力
+                    o = obs[j]; m_ = MPF[j]; rf = rfo[j]
+                    v_m = sB[j] * o["vB"]
+                    a_f = dt / (dt + 1 / (2 * math.pi * max(args.fb_force_lpf, 0.1)))
+                    tau_out = tauB_cmd[j] if args.follower_mode == "current" else sB[j] * stB[ids[j]][0] / 1000 * m_["kt"]
+                    fr_shape = min(1.0, max(0.0, (abs(v_m) - 0.05) / 0.2)) * math.copysign(1.0, v_m)
+                    rf["tau"] += a_f * (tau_out - rf["tau"])
+                    rf["mdl"] += a_f * ((m_["b"] * v_m + (args.follower_comp if args.follower_mode == "current" else 1.0) * m_["tc"] * fr_shape) - rf["mdl"])
+                    rf["a"] += a_f * (sB[j] * o["aB"] - rf["a"])                        # aB 本身已是 6 Hz，这里再同步一次相位
+                    fhat[j] = rf["tau"] - m_["J"] * rf["a"] - rf["mdl"]
+                    th_f = args.fb_force_th / 1000
+                    if abs(fhat[j]) > th_f:
+                        t -= args.fb_force * (abs(fhat[j]) - th_f) * math.copysign(1.0, fhat[j]) * dirn[j]
                 if MP and not args.wall and not args.coupling:
                     vL = obs[j]["vL"]
-                    t -= B_contact * vL * gate[j]                            # 接触时按阻尼比给阻尼，用观测速度
+                    t -= B_contact[j] * vL * gate[j]                         # 接触时按阻尼比给阻尼，用观测速度
                     # 推人时的效率补偿：电机出力方向和运动方向一致 = 电机在推人，摩擦从出力里扣，按 (1+φ) 放大；只在接触时
                     if gate[j] > 0 and abs(t) > 1e-6:
                         drive = max(0.0, math.tanh(vL * math.copysign(1.0, t) / args.v0))
-                        t *= 1.0 + phi_eff * drive * gate[j]
+                        t *= 1.0 + phi_eff[j] * drive * gate[j]
                 t = float(np.clip(t * ramp * fb_scale[j], -args.max_torque, args.max_torque))
                 tau_f[j] += alpha * (t - tau_f[j])
                 ff = 0.0
@@ -569,11 +705,11 @@ def main():
                     # 空载库仑摩擦前馈（墙模式里由饱和位置环实现）：|v| < 0.3 rad/s 不补（零速附近有斜率就是负阻尼），0.3–0.8 线性过渡；只补空载那几 mN·m
                     vL = obs[j]["vL"]
                     ramp_v = min(1.0, max(0.0, (abs(vL) - args.v_dead) / args.v_ramp)) * math.copysign(1.0, vL)
-                    ff += args.comp_gain * MP["tc"] * ramp_v / MP["kt"] * 1000 * ramp
+                    ff += args.comp_gain * MPJ[j]["tc"] * ramp_v / MPJ[j]["kt"] * 1000 * ramp
                     if args.b_free > 0:
                         # 空载粘滞让它停下来，但封顶在"补掉的那部分库仑摩擦"：再快也不会比关扭矩更重，慢速照样轻
-                        visc = min(args.b_free * abs(vL), args.comp_gain * MP["tc"]) * math.copysign(1.0, vL)
-                        ff -= visc * (1.0 - gate[j]) / MP["kt"] * 1000 * ramp
+                        visc = min(args.b_free * abs(vL), args.comp_gain * MPJ[j]["tc"]) * math.copysign(1.0, vL)
+                        ff -= visc * (1.0 - gate[j]) / MPJ[j]["kt"] * 1000 * ramp
                 if args.friction_ma > 0:                                   # 摩擦补偿：顺着主手运动方向；|v| < 0.15 rad/s 不补，免得静止时抖
                     v0 = 0.15
                     ff = args.friction_ma * math.tanh((abs(velA) - v0) / 0.3) * math.copysign(1, velA) * ramp if abs(velA) > v0 else 0.0
@@ -593,7 +729,7 @@ def main():
                         q_wall_j = jmap.inverse(qB)[j] if (stB is not None or args.lock) else obs[j]["qL"]
                         toward = math.copysign(1.0, q_wall_j - obs[j]["qL"]) if abs(q_wall_j - obs[j]["qL"]) > 1e-4 else 0.0
                         drive = math.tanh(obs[j]["vL"] * toward / args.v0)             # +1 往墙的位置走 = 电机在推人
-                        phi = MP["k_load"] / args.r_load                                # 负载摩擦 / 力矩
+                        phi = MPJ[j]["k_load"] / r_load[j]                               # 负载摩擦 / 力矩
                         tau_cap *= (1.0 + phi * drive)
                     i_max = tau_cap / kt_lead[j] * 1000
                     # 门控只用来【开】墙。开着期间墙是静止的障碍：从手目标停在墙里 wall-press 度（保持一个稳定的接触电流），
@@ -667,19 +803,21 @@ def main():
                         tau_cmd = cur[i] / 1000 * kt_lead[j]                       # 电机坐标（cur 已含 sA）
                         v_raw = sA[j] * obs[j]["vL"]                               # 电机坐标的观测速度
                         free = max(0.0, 1.0 - gate[j] / 0.3)                       # 门控 >0.3 当接触：前馈和电流环都停，纯电压模式
-                        v_ff = args.pwm_cancel * free * pwm_ke * v_raw             # 反电动势前馈（只抵消一部分，估高了是负阻尼）
+                        g_, ke_, r_ = pwm_g[j], pwm_ke[j], pwm_r[j]
+                        v_ff = args.pwm_cancel * free * ke_ * v_raw                 # 反电动势前馈（只抵消一部分，估高了是负阻尼）
                         # 软件电流环：实测电流追指令电流的积分修正。慢（--pwm-iloop），所以低频像电流模式、高频保留电磁阻尼。
                         # 积分只允许表示反电动势：|u_I| ≤ 1.3·Ke·|v̂| + 0.3 V，堵转时它就是 ~0，松手瞬间不会有积分在推
-                        if free > 0 and pwm_ki > 0 and abs(duty_prev.get(i, 0.0)) < args.pwm_limit - 1e-6:
-                            pwm_ui[j] += pwm_ki * (cur[i] - stA[i][0]) / 1000 * dt
-                        lim_ui = 1.3 * pwm_ke * abs(v_raw) + 0.3
+                        if free > 0 and args.pwm_iloop > 0 and abs(duty_prev.get(i, 0.0)) < args.pwm_limit - 1e-6:
+                            ki_ = 2 * math.pi * args.pwm_iloop * r_eff(j, cur[i] / 1000, v_bus)       # 交越 = Ki/R_表观，断续导通区自动放大
+                            pwm_ui[j] += ki_ * (cur[i] - stA[i][0]) / 1000 * dt
+                        lim_ui = 1.3 * ke_ * abs(v_raw) + 0.5
                         pwm_ui[j] = float(np.clip(pwm_ui[j], -lim_ui, lim_ui)) * (1.0 if free > 0 else 0.98)   # 接触时慢慢放掉
-                        d = (tau_cmd / pwm_g + v_ff + pwm_ui[j]) / v_bus * 100
+                        d = (duty_for_current(j, cur[i] / 1000, v_bus) + (v_ff + pwm_ui[j]) / v_bus) * 100   # 力矩部分查表，反电动势和积分是电压
                         # 电压模式没有硬件限流：按 i = (duty·V − Ke·v)/R 把占空比限制在 |i| ≤ leader-limit 内，
                         # 再用实测电流兜底（超 25% 立刻按比例压下来）
                         i_lim = args.leader_limit / 1000
-                        d_hi = (i_lim * pwm_r + pwm_ke * v_raw) / v_bus * 100
-                        d_lo = (-i_lim * pwm_r + pwm_ke * v_raw) / v_bus * 100
+                        d_hi = (duty_for_current(j, i_lim, v_bus) + ke_ * v_raw / v_bus) * 100
+                        d_lo = (-duty_for_current(j, i_lim, v_bus) + ke_ * v_raw / v_bus) * 100
                         d = min(max(d, d_lo, -args.pwm_limit), d_hi, args.pwm_limit)
                         i_m = abs(stA[i][0]) / 1000
                         if i_m > 1.25 * i_lim:
@@ -752,7 +890,7 @@ def main():
                 w.writerow(["t"] + [f"{j}:{k}" for j in joints for k in ("qA", "dqA", "iA_meas", "iA_cmd", "qB", "dqB", "iB_meas", "kpB", "gate", "err", "tau_fb", "ff_mA", "dir", "vL_obs", "iB_free")])
                 w.writerow(["# models"] + [f"{j}:{MODEL_NAME[models[j]]}" for j in joints])
                 w.writerow(["# settings", f"follower_kp:{kp0}",
-                            f"follower_kd:{args.follower_kd if args.follower_kd is not None else 0}", f"follower_limit_mA:{args.follower_limit}",
+                            f"follower_kd:{args.follower_kd if args.follower_kd is not None else 0}", f"follower_ki:{args.follower_ki or 0}", f"follower_limit_mA:{args.follower_limit}",
                             f"leader_kp:{args.kp}", f"deadband_deg:{args.deadband}",
                             f"adaptive_kp:{'%d/%d/%.0f' % (args.adaptive_kp[0], args.adaptive_kp[1], args.adapt_ref) if args.adaptive_kp else 'off'}"])
                 w.writerows(log)

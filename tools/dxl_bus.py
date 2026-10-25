@@ -46,7 +46,7 @@ ADDR_MODEL, ADDR_MODE, ADDR_CURRENT_LIMIT, ADDR_BUS_WATCHDOG, ADDR_GOAL_CURRENT 
 ADDR_HW_ERROR = 70
 ADDR_GOAL_POSITION = 116
 ADDR_PWM_LIMIT, ADDR_GOAL_PWM, PWM_FULL = 36, 100, 885   # PWM 模式（Operating Mode 16）：Goal PWM ±885 = ±100% 占空比
-ADDR_POS_D_GAIN, ADDR_POS_P_GAIN = 80, 84
+ADDR_POS_D_GAIN, ADDR_POS_I_GAIN, ADDR_POS_P_GAIN = 80, 82, 84
 HW_ERRORS = {0: "输入电压超限", 2: "过热", 3: "编码器", 4: "电气冲击", 5: "过载"}
 ADDR_PRESENT_CURRENT = 126          # 126 电流(2) + 128 速度(4) + 132 位置(4)，一次读 10 字节
 VEL_UNIT = 0.229 * 2 * math.pi / 60  # Present Velocity 1 单位 = 0.229 rpm -> rad/s
@@ -294,13 +294,15 @@ class Bus:
             self._check(self.pkt.write1ByteTxRx(self.port, i, ADDR_BUS_WATCHDOG, max(1, watchdog_ms // 20) if watchdog_ms > 0 else 0), i, "开看门狗")   # 0 = 不开
         self.pos_writer = GroupSyncWrite(self.port, self.pkt, ADDR_GOAL_POSITION, 4)
 
-    def set_position_gains(self, p=None, d=None):
-        """从手位置环的 P / D 增益（切到模式 5 之后再设，切模式会把它们复位成默认值 P=400, D=0）"""
+    def set_position_gains(self, p=None, d=None, i_gain=None):
+        """从手位置环的 P / I / D 增益（切到模式 5 之后再设，切模式会把它们复位成默认值 P=400, I=0, D=0）"""
         for i in self.ids:
             if p is not None:
                 self._check(self.pkt.write2ByteTxRx(self.port, i, ADDR_POS_P_GAIN, int(p)), i, "写 P 增益")
             if d is not None:
                 self._check(self.pkt.write2ByteTxRx(self.port, i, ADDR_POS_D_GAIN, int(d)), i, "写 D 增益")
+            if i_gain is not None:
+                self._check(self.pkt.write2ByteTxRx(self.port, i, ADDR_POS_I_GAIN, int(i_gain)), i, "写 I 增益")
 
     def write_p_gains(self, gains):
         """{id: 位置环 P 增益}，一次 Sync Write；扭矩开着也能写（RAM 区），用于刚度随接触变化"""
